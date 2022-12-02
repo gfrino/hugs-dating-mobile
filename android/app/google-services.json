@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "335651452118",
+    "project_id": "hugs-datings",
+    "storage_bucket": "hugs-datings.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335651452118:android:6bde7e75071c0dbeec0577",
+        "android_client_info": {
+          "package_name": "com.root.hugsdatings"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335651452118-vs817hdo7jhpc7d4ocnk5fhqh5rrv2ep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.root.hugsdatings",
+            "certificate_hash": "32eaa854acebc5e0b84afe04aa9bbbded8152765"
+          }
+        },
+        {
+          "client_id": "335651452118-mvuqehh0bhjrt8jmljq3rpq6tvov8a9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN5gEAJiTFPwubZJWOiH16xGPBde_8xJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335651452118-mvuqehh0bhjrt8jmljq3rpq6tvov8a9m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "335651452118-taslnmhn2fts0079qktrsinroqrocnfg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.root.hugsdatings"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

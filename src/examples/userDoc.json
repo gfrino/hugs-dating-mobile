@@ -1,0 +1,33 @@
+{
+    "appIdentifier": "rn-dating-android",
+    "badgeCount": 0,
+    "coordinates": { "_latitude": 37.785834, "_longitude": -122.406417 },
+    "createdAt": 1647532269,
+    "currentRecommendationSize": 9,
+    "email": "rickmovistar@gmail.com",
+    "firstName": "Rick",
+    "g": {
+      "geohash": "9q8yywdq7v",
+      "geopoint": { "_latitude": 37.785834, "_longitude": -122.406417 }
+    },
+    "hasComputedRcommendations": true,
+    "id": "QmAoaakLJQU4bgF6l5ndPE3iinB3",
+    "isOnline": true,
+    "lastName": "Movistar",
+    "lastOnlineTimestamp": 1647532270,
+    "location": { "latitude": 37.785834, "longitude": -122.406417 },
+    "phone": "",
+    "profilePictureURL": "https://www.iosapptemplates.com/wp-content/uploads/2019/06/empty-avatar.jpg",
+    "pushKitToken": "",
+    "pushToken": "en0ikUvsekt4gdH16kubLi:APA91bEqBXd1hZ9wHRDivdxs1ezORlVFkLAUSt2RDZZx7Tu3u28IsoybGad6suO7DvyYYHlIh45ly7p67bmE2Llf5zbjRZFJOzkqBeqvp7SfUBH8a9MfCP4iKD5XbrKeKsEAT1i_Zt26",
+    "settings": {
+      "distance_radius": "unlimited",
+      "gender": "none",
+      "gender_preference": "all",
+      "show_me": true
+    },
+    "signUpLocation": { "latitude": 37.785834, "longitude": -122.406417 },
+    "userID": "QmAoaakLJQU4bgF6l5ndPE3iinB3",
+    "username": ""
+  }
+  

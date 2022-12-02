@@ -1,0 +1,9 @@
+{
+  "name": "HugsDating",
+  "displayName": "Hugs Dating",
+  "extra": {
+    "eas": {
+      "projectId": "ac044dd5-1ece-4d6e-9f41-ff0d5fd43032"
+    }
+  }
+}
