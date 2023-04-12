@@ -231,7 +231,7 @@
   "You have no free uses left for this month": "Sie haben keine freien Verwendungen für diesen Monat mehr",
   "Be the top profile in your area for 30 minutes and make your profile stand out!": "Seien Sie 30 Minuten lang das Top-Profil in Ihrer Nähe und heben Sie Ihr Profil hervor!",
   "Enter location address": "Standortadresse eingeben",
-  "Dating": "Datierung",
+  "Dating": "Dating",
   "Study": "Studieren",
   "Sports": "Sport",
   "Travel": "Reise",
@@ -294,5 +294,7 @@
   "Display in Full Screen": "Anzeige im Vollbildmodus",
   "Cancel Match": "Match abbrechen",
   "Are you sure you want to cancel your match with this user? You won't see their messages again.": "Sind Sie sicher, dass Sie Ihre Begegnung mit diesem Benutzer abbrechen möchten? Sie werden ihre Nachrichten nicht mehr sehen.",
-  "Filter objectionable material": "Filter material, das unangemessen ist"
+  "Filter objectionable material": "Filter material, das unangemessen ist",
+  "With disabilities":"Mit Behinderungen",
+  "Without disabilities":"Ohne Behinderungen"
 }

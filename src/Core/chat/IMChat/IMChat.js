@@ -40,6 +40,7 @@ function IMChat(props) {
     showRenameDialog,
     onLeave,
     onUserBlockPress,
+    onUserUnblockPress,
     onUserReportPress,
     onCancelMatchPress,
     onSenderProfilePicturePress,
@@ -66,6 +67,8 @@ function IMChat(props) {
 
   const hasPreviouslyMarkedTyping = useRef(false)
   const staleUserTyping = useRef(null)
+
+  const [isLongPress,setIsLongPress] = useState(false);
 
   const inBoundThreadItemSheetOptions = [
     localized('Reply'),
@@ -94,7 +97,7 @@ function IMChat(props) {
     const userID = user.id
     const typingUsers = channelItem?.typingUsers || []
     const typingUsersCopy = [...typingUsers]
-    const timestamp =  getUnixTimeStamp();
+    const timestamp = getUnixTimeStamp();
     const notTypingUser = {
       userID,
       isTyping: false,
@@ -196,17 +199,26 @@ function IMChat(props) {
       }
       var message, actionCallback
       if (index == 0) {
-        actionCallback = onUserBlockPress
-        message = localized(
-          "Are you sure you want to block this user? You won't see their messages again.",
-        )
+        console.log("++++++++++============ ||", lockData)
+        if (lockData.locked) {
+          actionCallback = onUserUnblockPress
+          message = localized(
+            "Are you sure you want to unblock this user? You will see their messages again.",
+          )
+        } else {
+          actionCallback = onUserBlockPress
+          message = localized(
+            "Are you sure you want to block this user? You won't see their messages again.",
+          )
+        }
+
       } else if (index == 1) {
         actionCallback = onUserReportPress
         message = localized(
           "Are you sure you want to report this user? You won't see their messages again.",
         )
       } else if (index == 2) {
-        actionCallback = onCancelMatchPress 
+        actionCallback = onCancelMatchPress
         message = localized(
           "Are you sure you want to cancel your match with this user? You won't see their messages again.",
         )
@@ -222,11 +234,13 @@ function IMChat(props) {
         },
       ])
     },
-    [localized, onUserBlockPress, onUserReportPress],
+    [localized, onUserBlockPress, onUserReportPress, lockData],
   )
 
   const onMessageLongPress = useCallback(
+    
     inReplyToItem => {
+      setIsLongPress(1)
       setTemporaryInReplyToItem(inReplyToItem)
 
       if (user.id === inReplyToItem.senderID) {
@@ -280,6 +294,7 @@ function IMChat(props) {
 
   const onThreadItemActionSheetDone = useCallback(
     index => {
+      setIsLongPress(0);
       if (threadItemActionSheet.inBound) {
         handleInBoundThreadItemActionSheet(index)
       } else {
@@ -290,117 +305,119 @@ function IMChat(props) {
   )
   return (
     <SafeAreaView style={styles.personalChatContainer}>
-      <ImageBackground 
-        style={{ flex: 1 }} 
+      <ImageBackground
+        style={{ flex: 1 }}
         source={theme.icons.Leaves_BG}
-        imageStyle={{ opacity: 0.15}}
+        imageStyle={{ opacity: 0.15 }}
       >
-      <KeyboardAwareView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        style={styles.nonkeyboardContainer}>
-        <MessageThread
-          messages={messages}
-          user={user}
-          onChatMediaPress={onChatMediaPress}
-          onSenderProfilePicturePress={onSenderProfilePicturePress}
-          onMessageLongPress={onMessageLongPress}
-          channelItem={channelItem}
-          onListEndReached={onListEndReached}
-        />
-      </KeyboardAwareView>
-      {!lockData.locked && (
-        <BottomInput
-          uploadProgress={uploadProgress}
-          value={inputValue}
-          onAudioRecordDone={onAudioRecordDone}
-          onChangeText={onChangeText}
-          onSend={onSend}
-          trackInteractive={true}
-          onAddMediaPress={() => onAddMediaPress(photoUploadDialogRef)}
-          onAddDocPress={onAddDocPress}
-          inReplyToItem={inReplyToItem}
-          onReplyingToDismiss={onReplyingToDismiss}
-          isPremium={isPremium}
-        />
-      )}
-      <ActionSheet
-        title={localized('Group Settings')}
-        options={[
-          localized('Rename Group'),
-          localized('Leave Group'),
-          localized('Cancel'),
-        ]}
-        cancelButtonIndex={2}
-        destructiveButtonIndex={1}
-      />
-      <ActionSheet
-        title={'Are you sure?'}
-        options={['Confirm', 'Cancel']}
-        cancelButtonIndex={1}
-        destructiveButtonIndex={0}
-      />
-      <DialogInput
-        isDialogVisible={isRenameDialogVisible}
-        title={localized('Change Name')}
-        hintInput={channel.name}
-        textInputProps={{ selectTextOnFocus: true }}
-        submitText={localized('OK')}
-        submitInput={onChangeName}
-        closeDialog={() => {
-          showRenameDialog(false)
-        }}
-      />
-      <ActionSheet
-        ref={photoUploadDialogRef}
-        title={localized('Photo Upload')}
-        options={[
-          localized('Launch Camera'),
-          localized('Open Photo Gallery'),
-          localized('Cancel'),
-        ]}
-        cancelButtonIndex={2}
-        onPress={onPhotoUploadDialogDone}
-      />
-      <ActionSheet
-        ref={groupSettingsActionSheetRef}
-        title={localized('Group Settings')}
-        options={[
-          localized('Rename Group'),
-          localized('Leave Group'),
-          localized('Cancel'),
-        ]}
-        cancelButtonIndex={2}
-        destructiveButtonIndex={1}
-        onPress={onGroupSettingsActionDone}
-      />
-      <ActionSheet
-        ref={privateSettingsActionSheetRef}
-        title={localized('Actions')}
-        options={[
-          localized('Block user'),
-          localized('Report user'),
-          localized('Cancel'),
-        ]}
-        cancelButtonIndex={2}
-        onPress={onPrivateSettingsActionDone}
-      />
-      {threadItemActionSheet?.options && (
+        <KeyboardAwareView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          style={styles.nonkeyboardContainer}>
+          <MessageThread
+            messages={messages}
+            user={user}
+            onChatMediaPress={onChatMediaPress}
+            onSenderProfilePicturePress={onSenderProfilePicturePress}
+            onMessageLongPress={onMessageLongPress}
+            onisLongPress={(val) => {setIsLongPress(val)}}
+            isLongPress={isLongPress}
+            channelItem={channelItem}
+            onListEndReached={onListEndReached}
+          />
+        </KeyboardAwareView>
+        {!lockData.locked && (
+          <BottomInput
+            uploadProgress={uploadProgress}
+            value={inputValue}
+            onAudioRecordDone={onAudioRecordDone}
+            onChangeText={onChangeText}
+            onSend={onSend}
+            trackInteractive={true}
+            onAddMediaPress={() => onAddMediaPress(photoUploadDialogRef)}
+            onAddDocPress={onAddDocPress}
+            inReplyToItem={inReplyToItem}
+            onReplyingToDismiss={onReplyingToDismiss}
+            isPremium={isPremium}
+          />
+        )}
         <ActionSheet
-          ref={threadItemActionSheetRef}
-          title={localized('Actions')}
-          options={threadItemActionSheet.options}
-          cancelButtonIndex={threadItemActionSheet.cancelButtonIndex}
-          destructiveButtonIndex={threadItemActionSheet.destructiveButtonIndex}
-          onPress={onThreadItemActionSheetDone}
+          title={localized('Group Settings')}
+          options={[
+            localized('Rename Group'),
+            localized('Leave Group'),
+            localized('Cancel'),
+          ]}
+          cancelButtonIndex={2}
+          destructiveButtonIndex={1}
         />
-      )}
-      <TNMediaViewerModal
-        mediaItems={mediaItemURLs}
-        isModalOpen={isMediaViewerOpen}
-        onClosed={onMediaClose}
-        selectedMediaIndex={selectedMediaIndex}
-      />
-      {loading && <TNActivityIndicator />}
+        <ActionSheet
+          title={'Are you sure?'}
+          options={['Confirm', 'Cancel']}
+          cancelButtonIndex={1}
+          destructiveButtonIndex={0}
+        />
+        <DialogInput
+          isDialogVisible={isRenameDialogVisible}
+          title={localized('Change Name')}
+          hintInput={channel.name}
+          textInputProps={{ selectTextOnFocus: true }}
+          submitText={localized('OK')}
+          submitInput={onChangeName}
+          closeDialog={() => {
+            showRenameDialog(false)
+          }}
+        />
+        <ActionSheet
+          ref={photoUploadDialogRef}
+          title={localized('Photo Upload')}
+          options={[
+            localized('Launch Camera'),
+            localized('Open Photo Gallery'),
+            localized('Cancel'),
+          ]}
+          cancelButtonIndex={2}
+          onPress={onPhotoUploadDialogDone}
+        />
+        <ActionSheet
+          ref={groupSettingsActionSheetRef}
+          title={localized('Group Settings')}
+          options={[
+            localized('Rename Group'),
+            localized('Leave Group'),
+            localized('Cancel'),
+          ]}
+          cancelButtonIndex={2}
+          destructiveButtonIndex={1}
+          onPress={onGroupSettingsActionDone}
+        />
+        <ActionSheet
+          ref={privateSettingsActionSheetRef}
+          title={localized('Actions')}
+          options={[
+            (lockData.locked) ? localized('Unblock user') : localized('Block user'),
+            localized('Report user'),
+            localized('Cancel'),
+          ]}
+          cancelButtonIndex={2}
+          onPress={onPrivateSettingsActionDone}
+        />
+        {threadItemActionSheet?.options && (
+          <ActionSheet
+            ref={threadItemActionSheetRef}
+            title={localized('Actions')}
+            options={threadItemActionSheet.options}
+            cancelButtonIndex={threadItemActionSheet.cancelButtonIndex}
+            destructiveButtonIndex={threadItemActionSheet.destructiveButtonIndex}
+            onPress={onThreadItemActionSheetDone}
+          />
+        )}
+        <TNMediaViewerModal
+          mediaItems={mediaItemURLs}
+          isModalOpen={isMediaViewerOpen}
+          onClosed={onMediaClose}
+          selectedMediaIndex={selectedMediaIndex}
+        />
+        {loading && <TNActivityIndicator />}
       </ImageBackground>
     </SafeAreaView>
   )

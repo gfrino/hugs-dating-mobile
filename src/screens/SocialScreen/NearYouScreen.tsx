@@ -55,6 +55,9 @@ const NearYouScreen = () => {
 
   const [radius, setRadius] = useState(25)
   const [isRadiusSelectorOpen, setIsRadiusSelectorOpen] = useState(false)
+  const [radiusOptions, setradiusOptions] = useState([25, 50, 100, 'VIP'])
+  //@ts-ignore @burzacoding
+  const isPremium = useSelector(state => state.inAppPurchase.isPlanActive)
 
   const boundsListRef = useRef<IBounds[] | null>(null)
 
@@ -68,6 +71,14 @@ const NearYouScreen = () => {
       })
     }
   }, [userSwipes])
+
+  useEffect(() => {
+    // console.log("asasassas", isPremium);
+    // console.log(currentUser.isPremium);
+    if (isPremium) {
+      setradiusOptions([25, 50, 100, 200, 500]);
+    }
+  }, [])
 
   //@ts-ignore @burzacoding
   const currentUser = useSelector(state => state.auth.user)
@@ -204,6 +215,7 @@ const NearYouScreen = () => {
         user.profilePictureURL ||
         getDefaultProfilePicture(user?.userCategory)
       return user ? (
+        <>
         <CardDetailsView
           key={'CardDetail' + user.id}
           profilePictureURL={profilePic}
@@ -223,6 +235,7 @@ const NearYouScreen = () => {
           onSwipeLeft={onDislikePressed}
           bottomTabBar={true}
         />
+        </>
       ) : null
     },
     [userDetail],
@@ -246,6 +259,7 @@ const NearYouScreen = () => {
         radius={radius}
         setIsOpen={setIsRadiusSelectorOpen}
         setRadius={setRadius}
+        radiusOptions={radiusOptions}
       />
       {isLoading ? (
         <View style={styles.loadingContainer}>
@@ -311,6 +325,7 @@ interface RadiusSelectProps {
   radius: number
   setIsOpen: (isOpen: boolean) => void
   setRadius: (radius: number) => void
+  radiusOptions: []
 }
 
 const RadiusSelect: React.FC<RadiusSelectProps> = ({
@@ -318,6 +333,7 @@ const RadiusSelect: React.FC<RadiusSelectProps> = ({
   setRadius,
   isOpen,
   setIsOpen,
+  radiusOptions
 }) => {
   const { localized } = useTranslations()
   const { appearance } = useTheme()
@@ -433,7 +449,7 @@ const RadiusSelect: React.FC<RadiusSelectProps> = ({
             exit={{
               opacity: 0,
             }}>
-            {[25, 50, 100, 200, 500].map((rad, index) => {
+            {radiusOptions.map((rad, index) => {
               return (
                 <MotiPressable
                   key={rad}
@@ -446,7 +462,7 @@ const RadiusSelect: React.FC<RadiusSelectProps> = ({
                     borderBottomWidth: index === 4 ? 0 : 1,
                   }}
                   onPress={() => {
-                    setRadius(rad)
+                    (isNaN(parseInt(rad))) ? "" : setRadius(rad);
                     setIsOpen(false)
                   }}>
                   <Text
@@ -454,7 +470,7 @@ const RadiusSelect: React.FC<RadiusSelectProps> = ({
                       paddingHorizontal: 4,
                       color: isDarkMode ? '#ebebeb' : '#888888',
                     }}>
-                    {rad} km
+                    {(isNaN(parseInt(rad))) ? rad : rad + ' km'}
                   </Text>
                 </MotiPressable>
               )
@@ -462,7 +478,7 @@ const RadiusSelect: React.FC<RadiusSelectProps> = ({
           </MotiView>
         ) : null}
       </AnimatePresence>
-    </View>
+    </View >
   )
 }
 

@@ -9,29 +9,35 @@ import { setUserData } from '../../Core/onboarding/redux/auth'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const availableCategories = [
+  // {
+  //   id: 'motor_disabilities',
+  //   name: 'Motor disabilities',
+  //   description: 'People on wheelchair or similar',
+  //   color: '#1F8000',
+  // },
+  // {
+  //   id: 'psychic_disability',
+  //   name: 'Psychic disability',
+  //   description: 'People with mental illness',
+  //   color: '#F40002',
+  // },
+  // {
+  //   id: 'sensory_disability',
+  //   name: 'Sensory disability',
+  //   description: 'People with hearing or vision problems',
+  //   color: '#5DC1B9',
+  // },
   {
-    id: 'motor_disabilities',
-    name: 'Motor disabilities',
+    id: 'with_disabilities',
+    name: 'With disabilities',
     description: 'People on wheelchair or similar',
-    color: '#1F8000',
-  },
-  {
-    id: 'psychic_disability',
-    name: 'Psychic disability',
-    description: 'People with mental illness',
-    color: '#F40002',
-  },
-  {
-    id: 'sensory_disability',
-    name: 'Sensory disability',
-    description: 'People with hearing or vision problems',
-    color: '#5DC1B9',
+    color: '#b8b809',
   },
   {
     id: 'no_disabilities',
-    name: 'No disabilities',
+    name: 'Without disabilities',
     description: 'People with no problems',
-    color: '#b8b809',
+    color: '#000fff',
   },
 ]
 

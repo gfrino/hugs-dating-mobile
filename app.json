@@ -1,6 +1,12 @@
 {
   "name": "HugsDating",
   "displayName": "Hugs Dating",
+  "runtimeVersion": "1.0.0",
+  "updates": {
+    "url": "https://u.expo.dev/ac044dd5-1ece-4d6e-9f41-ff0d5fd43032"
+  },
+  "android": {},
+  "ios": {},
   "extra": {
     "eas": {
       "projectId": "ac044dd5-1ece-4d6e-9f41-ff0d5fd43032"

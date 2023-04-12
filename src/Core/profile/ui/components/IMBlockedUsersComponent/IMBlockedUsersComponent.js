@@ -20,6 +20,7 @@ const IMBlockedUsersComponent = props => {
   const styles = dynamicStyles(theme, appearance)
 
   const renderItemView = ({ item }) => {
+    console.log("itemitemitem", item);
     const profilePicture = item.profilePictureURL
       ? item.user?.profilePictureURL
       : getDefaultProfilePicture(item.userCategory)

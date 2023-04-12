@@ -12,7 +12,8 @@
     "test": "jest",
     "lint": "eslint .",
     "prettier": "prettier --write '*.js' 'src/**/*.js'",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "start": "react-native start"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "2.0.0",

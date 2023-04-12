@@ -3,14 +3,16 @@ import { BackHandler, Linking } from 'react-native'
 import { useTheme, useTranslations } from 'dopenative'
 import { useFocusEffect } from '@react-navigation/core'
 import IMFormComponent from '../IMFormComponent/IMFormComponent'
-
+import {Text} from 'react-native'
 function IMContactUsScreen(props) {
   const { localized } = useTranslations()
   const { theme, appearance } = useTheme()
 
   let screenTitle = props.route.params.screenTitle || localized('Contact Us')
   const form = props.route.params.form
-  const phone = props.route.params.phone
+  console.log("props.route.params",props.route.params.form.sections[0].fields[0].value);
+  // const email = props.route.params.email
+  const email = props.route.params.form.sections[0].fields[0].value;
   const initialValuesDict = {}
 
   useFocusEffect(
@@ -45,16 +47,18 @@ function IMContactUsScreen(props) {
   }
 
   const onFormButtonPress = _buttonField => {
-    Linking.openURL(`tel:${phone}`)
+    Linking.openURL(`mailto:${email}`)
   }
 
   return (
+    <>
     <IMFormComponent
       form={form}
       initialValuesDict={initialValuesDict}
       navigation={props.navigation}
       onFormButtonPress={onFormButtonPress}
     />
+    </>
   )
 }
 

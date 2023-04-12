@@ -208,13 +208,21 @@ const RoomSwiper: React.FC<StackScreenProps<{}>> = ({ navigation, route }) => {
         swipeItem,
         type,
       )
+      // await roomSwipeTracker.current?.updateUserSwipeCount(0);
+      console.log("())()()()(()(", roomSwipeTracker.current?.getUserSwipeCount());
+      roomSwipeTracker.current?.getUserSwipeCount().then((res: any) => {
+        roomSwipeTracker.current?.updateUserSwipeCount(res.count + 1);
+        console.log("())()()()(()(", res.count);
+      })
       if (matchedUser) {
         addToMatches(matchedUser)
       }
-      // updateSwipeCountDetail()
+
       // getUserSwipeCount()
     }
   }
+
+
 
   const onAllCardsSwiped = () => {
     setRecommendations([])

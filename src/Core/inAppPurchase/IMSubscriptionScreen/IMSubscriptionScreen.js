@@ -32,6 +32,7 @@ export default function IMSubscriptionScreen(props) {
 
   const subscriptions = useSelector(state => state.inAppPurchase.plans)
 
+
   const [selectedSubscriptionIndex, setSelectedSubscriptionIndex] = useState(0)
   const [selectedSubscriptionPlan, setSelectedSubscriptionPlan] = useState({})
   const { config } = useIAPConfig()
@@ -46,7 +47,7 @@ export default function IMSubscriptionScreen(props) {
 
   useEffect(() => {
     if (subscriptions.length === 0) {
-      ;(async () => {
+      ; (async () => {
         await initConnection()
         getIAPProducts()
       })()
@@ -108,7 +109,7 @@ export default function IMSubscriptionScreen(props) {
             style={[
               styles.tickIconContainer,
               selectedSubscriptionIndex === index &&
-                styles.selectedSubscription,
+              styles.selectedSubscription,
             ]}>
             {selectedSubscriptionIndex === index && (
               <Image
@@ -125,8 +126,8 @@ export default function IMSubscriptionScreen(props) {
               {Platform.OS === 'ios'
                 ? item?.subscriptionPeriodUnitIOS?.toLowerCase()
                 : item.productId === 'annual_vip_subscription'
-                ? localized('year')
-                : localized('month')}
+                  ? localized('year')
+                  : localized('month')}
             </Text>
           </Text>
         </View>
@@ -185,11 +186,11 @@ export default function IMSubscriptionScreen(props) {
             disabled={processing || subscriptions.length < 1}
             onPress={handleSubscription}
             style={styles.bottomButtonContainer}>
-            <Text style={styles.buttonTitle}>{'Purchase'}</Text>
+            <Text style={styles.buttonTitle}>{localized('Purchase')}</Text>
           </TouchableOpacity>
           {Platform.OS !== 'ios' && (
             <TouchableOpacity onPress={onClose}>
-              <Text style={styles.cancelTitle}>{'Cancel'}</Text>
+              <Text style={styles.cancelTitle}>{localized('Cancel')}</Text>
             </TouchableOpacity>
           )}
         </View>

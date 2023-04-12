@@ -30,6 +30,10 @@ const loginWithEmailAndPassword = (email, password) => {
         AsyncStorage.setItem('logged_in_user_id', json?.userData?.id)
         handleSuccessfulLogin(json.userData, false).then(res => {
           // Persisted login successful, push token stored, login credential persisted, so we log the user in.
+          // const userData = {
+          //   isOnline: false,
+          // }
+          // updateUser(res.user.id, userData);
           resolve({
             user: res.user,
           })

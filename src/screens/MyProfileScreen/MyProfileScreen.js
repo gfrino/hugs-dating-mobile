@@ -161,9 +161,16 @@ const MyProfileScreen = props => {
   const onOpenPhotos = () => {
     ImagePicker.openPicker({
       cropping: false,
+      multiple: true
     })
-      .then(image => {
-        startUpload(image, updateUserPhotos)
+      .then(images => {
+        for (image in images) {
+          // console.log(images[image]);
+          startUpload(images[image], updateUserPhotos)
+          // console.log("+++++++++");
+        }
+
+        // startUpload(image, updateUserPhotos)
       })
       .catch(error => {
         console.log(error)
@@ -407,7 +414,7 @@ const MyProfileScreen = props => {
                   {localized('Upgrade account')}
                 </Text>
               </View>
-            </TouchableOpacity> 
+            </TouchableOpacity>
             <TouchableOpacity style={styles.optionView} onPress={setting}>
               <View style={styles.iconView}>
                 <Image
@@ -498,10 +505,10 @@ const MyProfileScreen = props => {
           />
 
           <ImageView
-              images={[{ source: { uri: photoSelectedForFullScreen.current } }]}
-              imageIndex={0}
-              isVisible={photoSelectedForFullScreen && showPhotoSelectedInFullScreen}
-              onClose={() => setShowSelectedPhotoInFullScreen(false)}
+            images={[{ source: { uri: photoSelectedForFullScreen.current } }]}
+            imageIndex={0}
+            isVisible={photoSelectedForFullScreen && showPhotoSelectedInFullScreen}
+            onClose={() => setShowSelectedPhotoInFullScreen(false)}
           />
         </View>
       </SafeAreaView>

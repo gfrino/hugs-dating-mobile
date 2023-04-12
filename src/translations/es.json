@@ -231,7 +231,7 @@
   "You have no free uses left for this month": "No te quedan usos gratuitos para este mes",
   "Be the top profile in your area for 30 minutes and make your profile stand out!": "¡Sea el perfil más recomendado en su área durante 30 minutos y haga que su perfil se destaque!",
   "Enter location address": "Introduzca la dirección de ubicación",
-  "Dating": "Citas",
+  "Dating": "Dating",
   "Study": "Estudio",
   "Sports": "Deporte",
   "Travel": "Viajes",
@@ -294,5 +294,7 @@
   "Meet people who love art!": "Encuentra personas que aman el arte!",
   "Artists": "Artistas",
   "Display in Full Screen": "Mostrar en Pantalla Completa",
-  "Filter objectionable material": "Filtrar material ofensivo"
+  "Filter objectionable material": "Filtrar material ofensivo",
+  "With disabilities":"Con discapacidades",
+  "Without disabilities":"Sin discapacidades"
 }

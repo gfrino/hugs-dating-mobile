@@ -33,6 +33,8 @@ function ThreadItem(props) {
     onSenderProfilePicturePress,
     onMessageLongPress,
     isRecentItem,
+    isLongPress,
+    onisLongPress
   } = props
   const { localized } = useTranslations()
   const { theme, appearance } = useTheme()
@@ -40,7 +42,7 @@ function ThreadItem(props) {
 
   const senderProfilePictureURL = item.senderProfilePictureURL
   const [readFacePile, setReadFacePile] = useState([])
-
+  const [hasisLongPress,setHasisLongPress] = useState(false);
   const videoRef = useRef(null)
   const imagePath = useRef()
 
@@ -57,6 +59,13 @@ function ThreadItem(props) {
   useEffect(() => {
     getReadFacePile()
   }, [item?.readUserIDs])
+
+  useEffect(() => {
+    if(isLongPress == false){
+      setHasisLongPress(isLongPress)
+    }
+    
+  }, [isLongPress])
 
   const getReadFacePile = () => {
     const facePile = []
@@ -186,19 +195,31 @@ function ThreadItem(props) {
   const handleOnPress = () => {}
 
   const handleOnLongPress = () => {
-    if (!isAudio && !isVideo && !item.url) {
+    
+    if (!isAudio && !isVideo && !item.url) {      
+      onisLongPress(1)
+      setHasisLongPress(1)
       onMessageLongPress && onMessageLongPress(item)
     }
   }
 
-  const handleOnPressOut = () => {}
+  const handleOnPressOut = () => {
+    // setIsLongPress(false);
+  }
 
   return (
     <TouchableWithoutFeedback
       onPress={handleOnPress}
       onLongPress={handleOnLongPress}
-      onPressOut={handleOnPressOut}>
-      <View>
+      onPressOut={handleOnPressOut}
+      
+      >
+      <View
+      style={hasisLongPress ? {
+        backgroundColor:"#00800059",
+        borderRadius:10,
+        overflow:'hidden'
+      }:{}}>
         {/* user thread item */}
         {outBound && (
           <>

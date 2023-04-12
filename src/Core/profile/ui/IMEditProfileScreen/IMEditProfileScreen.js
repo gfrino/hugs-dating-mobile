@@ -47,6 +47,7 @@ export default function IMEditProfileScreen(props) {
       },
       headerTintColor: colorSet.primaryText,
     })
+    console.log("alteredFormDict", alteredFormDict);
   }, [alteredFormDict])
 
   useFocusEffect(

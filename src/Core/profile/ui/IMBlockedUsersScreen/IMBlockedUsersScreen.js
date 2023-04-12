@@ -23,6 +23,8 @@ const IMBlockedUsersScreen = props => {
   const onUserUnblock = useCallback(
     async userID => {
       setIsLoading(true)
+      console.log("currentUser.id", currentUser);
+      console.log("userID", userID);
       await unblockUser(currentUser.id, userID)
 
       setIsLoading(false)

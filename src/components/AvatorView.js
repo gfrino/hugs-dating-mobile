@@ -36,8 +36,8 @@ const AvatorView = props => {
           styles.onlineView,
           props.user.isOnline
             ? {
-                backgroundColor: theme.colors[appearance].primaryForeground,
-              }
+              backgroundColor: theme.colors[appearance].primaryForeground,
+            }
             : { backgroundColor: 'gray' },
         ]}
       />

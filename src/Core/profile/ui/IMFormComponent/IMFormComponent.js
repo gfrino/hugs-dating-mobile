@@ -28,15 +28,17 @@ function IMFormComponent(props) {
   )
 
   const isPremium = useSelector(state => state.inAppPurchase.isPlanActive)
+  // const isPremium = useSelector(state => true)  //:TODO All User isPremium CHECK THIS
   const [selectedUserCategory, setSelectedUserCategory] = useState(
     initialValuesDict.userCategory ||
-      initialValuesDict.category_preference ||
-      'all',
+    initialValuesDict.category_preference ||
+    'all',
   )
 
   const onFormFieldValueChange = (formField, value) => {
     var newFieldsDict = { ...alteredFormDict }
     newFieldsDict[formField.key] = value
+    console.log("newFieldsDict", newFieldsDict)
     setAlteredFormDict(newFieldsDict)
     onFormChange(newFieldsDict)
     if (
@@ -173,11 +175,11 @@ function IMFormComponent(props) {
             isPremium
               ? onMapFieldPress
               : () =>
-                  alertUserPremiumFeature(
-                    localized(
-                      'Upgrade your account to set a custom location anytime you want',
-                    ),
-                  )
+                alertUserPremiumFeature(
+                  localized(
+                    'Upgrade your account to set a custom location anytime you want',
+                  ),
+                )
           }>
           <Text style={styles.text}>{mapField.displayName}</Text>
           <Text style={styles.text}>
@@ -261,18 +263,18 @@ function IMFormComponent(props) {
             section.title
               ? {}
               : {
-                  backgroundColor: 'transparent',
-                  borderTopWidth: 0,
-                  shadowColor: '#000',
-                  shadowOffset: {
-                    width: 0,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.16,
-                  shadowRadius: 2,
-
-                  elevation: 2,
+                backgroundColor: 'transparent',
+                borderTopWidth: 0,
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
                 },
+                shadowOpacity: 0.16,
+                shadowRadius: 2,
+
+                elevation: 2,
+              },
           ]}>
           {section.fields.map((field, index) =>
             renderField(field, index, section.fields.length),
@@ -326,7 +328,9 @@ const formatUserCategory = (userCategory, localized) => {
     case 'sensory_disability':
       return localized('Sensory disability')
     case 'no_disabilities':
-      return localized('No disabilities')
+      return localized('Without disabilities')
+    case 'with_disabilities':
+      return localized('With disabilities')
     case 'all':
       return localized('All')
     default:

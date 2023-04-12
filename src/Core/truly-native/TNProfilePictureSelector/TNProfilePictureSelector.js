@@ -98,11 +98,12 @@ const TNProfilePictureSelector = props => {
 
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true
       // allowsEditing: true,
       // aspect: [4, 3],
       // quality: 1,
     })
-
+    console.log("allowsMultipleSelection", true)
     console.log(result)
 
     if (!result.cancelled) {
@@ -143,7 +144,7 @@ const TNProfilePictureSelector = props => {
         <TouchableHighlight
           style={[
             styles.imageContainer,
-            profilePictureBorder[currentUser?.settings?.gender ||  "default"],
+            profilePictureBorder[currentUser?.settings?.gender || "default"],
           ]}
           onPress={() => handleProfilePictureClick(profilePictureURL)}>
           <Image

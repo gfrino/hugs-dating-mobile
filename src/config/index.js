@@ -160,16 +160,18 @@ export const ConfigProvider = ({ children }) => {
               displayName: localized('My category'),
               type: 'select',
               options: [
-                'motor_disabilities',
-                'psychic_disability',
-                'sensory_disability',
+                // 'motor_disabilities',
+                // 'psychic_disability',
+                // 'sensory_disability',
                 'no_disabilities',
+                'with_disabilities',
               ],
               displayOptions: [
-                'Motor disabilities',
-                'Psychic disability',
-                'Sensory disability',
-                'No disabilities',
+                // 'Motor disabilities',
+                // 'Psychic disability',
+                // 'Sensory disability',
+                'Without disabilities',
+                'With disabilities',
               ],
               editable: true,
               key: 'userCategory',
@@ -264,17 +266,19 @@ export const ConfigProvider = ({ children }) => {
               displayName: localized('Category preference'),
               type: 'select',
               options: [
-                'motor_disabilities',
-                'psychic_disability',
-                'sensory_disability',
+                // 'motor_disabilities',
+                // 'psychic_disability',
+                // 'sensory_disability',
                 'no_disabilities',
+                'with_disabilities',
                 'all',
               ],
               displayOptions: [
-                localized('Motor disabilities'),
-                localized('Psychic disability'),
-                localized('Sensory disability'),
-                localized('No disabilities'),
+                // localized('Motor disabilities'),
+                // localized('Psychic disability'),
+                // localized('Sensory disability'),
+                localized('Without disabilities'),
+                localized('With disabilities'),
                 localized('All'),
               ],
               editable: true,
@@ -332,31 +336,20 @@ export const ConfigProvider = ({ children }) => {
         {
           title: localized('CONTACT'),
           fields: [
-
             {
               displayName: localized('E-mail us'),
-              value: 'hugs.datings@gmail.com',
+              value: 'info@hugsdating.app',
               type: 'text',
               editable: false,
               key: 'email',
               placeholder: 'Your email address',
             },
           ],
-        },
-        {
-          title: '',
-          fields: [
-            {
-              displayName: localized('Call Us'),
-              type: 'button',
-              key: 'savebutton',
-            },
-          ],
-        },
+        },        
       ],
     },
-    dailySwipeLimit: 10,
-    totalSwipeLimit: 100,
+    dailySwipeLimit: 50, //:TODO Daily limit
+    totalSwipeLimit: 1,
     subscriptionSlideContents: [
       {
         title: localized('Go VIP'),

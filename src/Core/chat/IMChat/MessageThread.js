@@ -16,6 +16,8 @@ function MessageThread(props) {
     onMessageLongPress,
     channelItem,
     onListEndReached,
+    isLongPress,
+    onisLongPress
   } = props
   const { theme, appearance } = useTheme()
   const styles = dynamicStyles(theme, appearance)
@@ -97,6 +99,8 @@ function MessageThread(props) {
         onSenderProfilePicturePress={onSenderProfilePicturePress}
         onMessageLongPress={onMessageLongPress}
         isRecentItem={isRecentItem}
+        isLongPress={isLongPress}
+        onisLongPress={onisLongPress}
       />
     )
   }

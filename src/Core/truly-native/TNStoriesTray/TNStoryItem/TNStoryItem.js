@@ -29,6 +29,7 @@ function StoryItem(props) {
 
   const lastName = item.lastName || ''
   return (
+
     <TouchableOpacity
       key={index}
       ref={refs}
@@ -49,6 +50,7 @@ function StoryItem(props) {
               styles.text,
               textStyle,
             ]}>{`${item.firstName} ${lastName}`}</Text>
+          {console.log(item)}
           {displayVerifiedBadge &&
             item.isVerified &&
             (item.username !== 'My Story' || item.username !== 'Add Story') && (

@@ -1,0 +1,18 @@
+
+subprojects {
+    afterEvaluate { subproject ->
+        if(subproject['name'] == 'react-native-create-thumbnail'){
+            def myAttribute = Attribute.of("com.android.build.api.attributes.BuildTypeAttr", String)
+            dependencies.attributesSchema {
+                attribute(myAttribute)
+            }
+            configurations {
+                implementation {
+                    attributes {
+                        attribute(myAttribute, "release")
+                    }
+                }
+            }
+        }
+    }
+}

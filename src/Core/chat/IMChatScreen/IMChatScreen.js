@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import Modal from 'react-native-modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert, BackHandler, View, Dimensions } from 'react-native'
 import { useTheme, useTranslations } from 'dopenative'
@@ -25,12 +26,25 @@ import { notificationManager } from '../../notifications'
 // VIDEO_CALL_FLAG_ENABLED_BEGIN
 import { initiateAVCall } from '../../avchat'
 // VIDEO_CALL_FLAG_ENABLED_END
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { IS_ANDROID } from '../../helpers/statics'
+import CardDetailsView from '../../../components/swipe/CardDetailsView/CardDetailsView'
+import {
+  Text,
+  Pressable
+} from 'react-native'
+
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 const IMChatScreen = props => {
   const { localized } = useTranslations()
   const { theme, appearance } = useTheme()
   const currentUser = useCurrentUser()
   const dispatch = useDispatch()
+  const { unblockUser } = useUserReportingMutations()
+
+  const safeAreas = useSafeAreaInsets()
 
   const { navigation, route } = props
   const openedFromPushNotification = route.params.openedFromPushNotification
@@ -57,6 +71,8 @@ const IMChatScreen = props => {
     locked: false,
     message: "",
   });
+
+  const [showModes, setShowModes] = useState(0)
 
   const { createChannel, markChannelMessageAsRead, updateGroup, leaveGroup } =
     useChatChannels()
@@ -144,10 +160,11 @@ const IMChatScreen = props => {
     var title = channel?.name
     var isGroupChat = channel?.otherParticipants?.length > 1
     if (!title && channel?.otherParticipants?.length > 0) {
+      // console.log("----->",JSON.stringify(channel.otherParticipants[0]));
       title =
         channel.otherParticipants[0]?.firstName +
-          ' ' +
-          channel.otherParticipants[0]?.lastName ||
+        ' ' +
+        channel.otherParticipants[0]?.lastName ||
         channel.otherParticipants[0]?.fullname
     }
 
@@ -159,12 +176,21 @@ const IMChatScreen = props => {
       headerBackTitleVisible: false,
       headerTitleStyle: isGroupChat
         ? {
-            width: Dimensions.get('window').width - 110,
-          }
+          width: Dimensions.get('window').width - 110,
+        }
         : null,
       headerTintColor: theme.colors[appearance].primaryText,
       headerRight: () => (
+        <>
         <View style={{ flexDirection: 'row' }}>
+          <IMIconButton
+            source={require('../assets/user.png')}
+            tintColor={theme.colors[appearance].primaryForeground}
+            onPress={() => {setShowModes(1)}}
+            marginRight={15}
+            width={20}
+            height={20}
+          />
           <IMIconButton
             source={require('../assets/settings-icon.png')}
             tintColor={theme.colors[appearance].primaryForeground}
@@ -172,7 +198,8 @@ const IMChatScreen = props => {
             marginRight={15}
             width={20}
             height={20}
-          />
+          />          
+          
           {/* VIDEO_CALL_FLAG_ENABLED_BEGIN */}
           <IMIconButton
             source={require('../assets/call.png')}
@@ -195,11 +222,58 @@ const IMChatScreen = props => {
             />
           ) : null}
           {/* VIDEO_CALL_FLAG_ENABLED_END */}
-        </View>
+        </View>        
+      </>
       ),
     })
   }
 
+  const renderCardDetail = (item, isDone) => {
+    {console.log("channel.otherParticipants",item)}
+    if (item == null) {
+      return false;
+    }
+    item = item.otherParticipants[0];
+    const profilePic =
+      item.profilePictureURL || getDefaultProfilePicture(item.userCategory)
+    return (
+      item && (
+        <CardDetailsView
+          key={'CardDetail' + item.id}
+          profilePictureURL={profilePic}
+          firstName={item.firstName}
+          lastName={item.lastName}
+          age={item.age}
+          school={item.school}
+          distance={item.distance}
+          bio={item.bio}
+          instagramPhotos={
+            item?.photos?.length > 0 ? item.photos : [profilePic]
+          }
+          uid={item.id}
+          setShowMode={(mode) => {console.log("///////",mode),setShowModes(mode)}}
+          onSwipeTop={onSuperLikePressed}
+          onSwipeRight={onLikePressed}
+          onSwipeLeft={onDislikePressed}
+          bottomTabBar={false}
+        />
+      )
+    )
+  }
+  const onDislikePressed = () => {
+    // useSwiper.current.swipeLeft()
+    console.log("asasas");
+  }
+
+  const onSuperLikePressed = () => {
+    // useSwiper.current.swipeTop()
+    console.log("asasas");
+  }
+
+  const onLikePressed = () => {
+    // useSwiper.current.swipeRight()
+    console.log("asasas");
+  }
   useEffect(() => {
     if (!remoteChannel) {
       return
@@ -226,12 +300,12 @@ const IMChatScreen = props => {
 
     const chatIsLocked = channel.lockedBy.length > 0;
     const isLockedByTheUser = channel.lockedBy
-      .find(blockerUID => blockerUID === currentUser.id ) !== -1;
-   
+      .find(blockerUID => blockerUID === currentUser.id) !== -1;
+
     setLockData({
       locked: chatIsLocked,
-      message: isLockedByTheUser 
-        ? localized("blocked") 
+      message: isLockedByTheUser
+        ? localized("blocked")
         : localized("unavailable"),
     });
   }, [channel]);
@@ -599,6 +673,29 @@ const IMChatScreen = props => {
     reportAbuse("block");
   }, [reportAbuse])
 
+  const onUserUnblockPress = useCallback(
+    async () => {
+      if (!lockData) {
+        return false;
+      }
+      setLoading(true)
+      const participants = route.params.channel?.participants;
+      console.log("participants", participants);
+
+      for (item in participants) {
+        console.log(" ========= item", participants[item]);
+        console.log(" ========= >>>>>>> currentUser.id", currentUser.id);
+        console.log(" ========= >>>>>>> item", participants[item].id);
+        await unblockUser(currentUser.id, participants[item].id)
+      }
+      setLockData(false);
+      setLoading(false)
+      // navigation.goBack(null)
+    },
+    [onUserUnblockPress, currentUser.id],
+  )
+
+
   const onUserReportPress = useCallback(() => {
     reportAbuse("report");
   }, [reportAbuse])
@@ -606,8 +703,8 @@ const IMChatScreen = props => {
   const onCancelMatchPress = useCallback(
     (mode) => {
       const channelParam = route.params.channel
-      const participants = channelParam?.participants || [] 
-      const destUserID = participants[0]?.id 
+      const participants = channelParam?.participants || []
+      const destUserID = participants[0]?.id
 
       if (!channelParam?.id || !currentUser?.id || !destUserID) {
         Alert.alert(localized('Oops! An error has occured. Please try again'))
@@ -671,6 +768,7 @@ const IMChatScreen = props => {
   const isPremium = useSelector(state => state.inAppPurchase.isPlanActive)
 
   return (
+    <>
     <IMChat
       user={currentUser}
       messages={messages}
@@ -697,6 +795,7 @@ const IMChatScreen = props => {
       onChangeName={onChangeName}
       onLeave={onLeave}
       onUserBlockPress={onUserBlockPress}
+      onUserUnblockPress={onUserUnblockPress}
       onUserReportPress={onUserReportPress}
       onCancelMatchPress={onCancelMatchPress}
       onReplyActionPress={onReplyActionPress}
@@ -706,7 +805,31 @@ const IMChatScreen = props => {
       onListEndReached={onListEndReached}
       isPremiumUser={isPremium}
       lockData={lockData}
-    />
+      />
+              
+      <Modal        
+        style={{
+          flex: 1,
+          width: SCREEN_WIDTH,
+          height: SCREEN_HEIGHT,
+          margin: 0,
+          alignItems: 'center',
+        }}
+        onBackdropPress={() => setShowModes(0)}
+        onBackButtonPress={() => setShowModes(0)}
+        isVisible={showModes}
+        >
+        <View style={{
+          alignItems: 'center',
+          width: SCREEN_WIDTH,
+          marginTop: safeAreas.top,
+          height: SCREEN_HEIGHT - safeAreas.top * (IS_ANDROID ? -1 : 1),
+        }}>          
+          {renderCardDetail(channel)}
+        </View>
+      </Modal>
+      </>
+    
   )
 }
 
