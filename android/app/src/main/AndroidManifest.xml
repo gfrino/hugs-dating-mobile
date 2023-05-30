@@ -21,18 +21,19 @@
   <uses-permission android:name="android.permission.BIND_TELECOM_CONNECTION_SERVICE" />
   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
   <uses-permission android:name="android.permission.CALL_PHONE" />
+  <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
   <!-- VIDEO_CALL_FLAG_ENABLED_END -->
 
-  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
+  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme" android:exported="true">
 
     <!-- VIDEO_CALL_FLAG_ENABLED_BEGIN -->
-    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
-    <service android:name="io.wazo.callkeep.VoiceConnectionService" android:label="Wazo" android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+    <service android:exported="true" android:enabled="true" android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+    <service android:exported="true" android:enabled="true" android:name="io.wazo.callkeep.VoiceConnectionService" android:label="Wazo" android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
       <intent-filter>
         <action android:name="android.telecom.ConnectionService" />
       </intent-filter>
     </service>
-    <service android:name="io.wazo.callkeep.RNCallKeepBackgroundMessagingService" />
+    <service android:exported="true" android:enabled="true" android:name="io.wazo.callkeep.RNCallKeepBackgroundMessagingService" />
     <!-- VIDEO_CALL_FLAG_ENABLED_END -->
 
 
@@ -41,7 +42,7 @@
     <!-- You will also only need to add this uses-library tag -->
     <uses-library android:name="org.apache.http.legacy" android:required="false" />
     <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
-    <activity android:name=".SplashActivity" android:theme="@style/SplashTheme" android:label="@string/app_name">
+    <activity android:name=".SplashActivity" android:theme="@style/SplashTheme" android:label="@string/app_name" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

@@ -8,7 +8,7 @@
     "android:start": "react-native run-android",
     "ios": "react-native run-ios",
     "build:bundle": "cd android && ./gradlew clean && ./gradlew bundleRelease",
-    "build:apk": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "build:apk": "cd android && ./gradlew assembleRelease && cd ../",
     "test": "jest",
     "lint": "eslint .",
     "prettier": "prettier --write '*.js' 'src/**/*.js'",
