@@ -46,7 +46,7 @@ const dynamicStyles = (theme, appearance) => {
       alignItems: 'center',
     },
     headerTitle: {
-      color: colorSet.primaryText,
+      // color: colorSet.primaryText,
       textAlign: 'center',
       fontSize: 26,
       paddingBottom: 3,
@@ -112,11 +112,11 @@ const dynamicStyles = (theme, appearance) => {
     },
     rateText: {
       fontSize: 16,
-      color: colorSet.primaryText,
+      // color: colorSet.primaryText,
     },
     monthText: {
       fontSize: 12,
-      color: colorSet.primaryText,
+      // color: colorSet.primaryText,
     },
     trialOptionContainer: {
       flex: 2,
@@ -140,7 +140,7 @@ const dynamicStyles = (theme, appearance) => {
       alignItems: 'center',
     },
     bottomHeaderTitle: {
-      color: colorSet.primaryText,
+      // color: colorSet.primaryText,
       fontSize: 16,
       textAlign: 'center',
       fontWeight: '600',

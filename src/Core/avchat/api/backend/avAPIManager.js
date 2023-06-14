@@ -1,8 +1,8 @@
 import io from 'socket.io-client'
 import AsyncStorage from '@react-native-community/async-storage'
 
-// const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 
 export default class AVAPIManager {
   // Readers and listeners from the signaling server

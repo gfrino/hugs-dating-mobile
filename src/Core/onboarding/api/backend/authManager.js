@@ -5,7 +5,8 @@ import { storageAPI } from '../../../media'
 import * as authAPI from './authClient'
 import { updateUser } from '../../../users'
 
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 /**
  * A method that logs the user into his account
  * Parameters

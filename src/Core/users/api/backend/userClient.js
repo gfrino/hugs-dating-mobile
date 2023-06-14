@@ -1,4 +1,5 @@
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 
 export const getUserByID = async userId => {
   const res = await fetch(baseAPIURL + 'user/' + userId, {

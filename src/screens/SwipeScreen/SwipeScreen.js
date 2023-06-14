@@ -215,10 +215,11 @@ const SwipeScreen = props => {
   const resetSwipeCountDetail = () => {
     swipeCountDetail.current = {
       count: 0,
-      createdAt: {
-        seconds: Date.now() / 1000,
-        _seconds: Date.now() / 1000,
-      },
+      createdAt: Date.now()
+      // createdAt: {
+      //   seconds: Date.now() / 1000,
+      //   _seconds: Date.now() / 1000,
+      // },
     }
   }
 
@@ -232,33 +233,38 @@ const SwipeScreen = props => {
   }
 
   const getSwipeTimeDifference = swipeCountDetail => {
-    let now = +new Date()
-    let createdAt = +new Date()
+    let now = Date.now();
+    let createdAt = now;
 
-    if (swipeCountDetail?.createdAt?.seconds) {
-      createdAt = +new Date(swipeCountDetail.createdAt.seconds * 1000)
+    console.log("qweqwe", swipeCountDetail);
+    // if (swipeCountDetail?.createdAt?.seconds) {
+    // if (swipeCountDetail?.createdAt) {
+    //   createdAt = +new Date(swipeCountDetail.createdAt * 1000)
+    // }
+    if (swipeCountDetail?.createdAt) {
+      createdAt = new Date(swipeCountDetail.createdAt * 1000).getTime();
     }
-
     return now - createdAt
   }
 
   const getCanUserSwipe = (shouldUpdate = true) => {
     if (isPlanActive) {
       setCanUserSwipe(false)
-
       return true
     }
 
-    const oneDay = 60 * 60 * 24 * 1000
-
+    const oneDay = 24 * 60 * 60 * 1000
     const swipeTimeDifference = getSwipeTimeDifference(swipeCountDetail.current)
+
+    console.log("isGreater", swipeTimeDifference > oneDay)
+    console.log("oneDay", oneDay)
+    console.log("swipeTimeDifference", swipeTimeDifference)
 
     if (swipeTimeDifference > oneDay) {
       resetSwipeCountDetail()
       updateSwipeCountDetail()
 
-      setCanUserSwipe(false)
-
+      setCanUserSwipe(true)
       return true
     }
 
@@ -271,11 +277,9 @@ const SwipeScreen = props => {
         updateSwipeCountDetail()
       }
 
-
       setCanUserSwipe(
         swipeCountDetail.current.count + 1 <= config.dailySwipeLimit,
       )
-
 
       return true
     }
@@ -461,6 +465,9 @@ const SwipeScreen = props => {
     )
   }
 
+  console.log("limitExcedeed", limitExcedeed)
+  console.log("swipeCountDetail", swipeCountDetail.current.count)
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
@@ -482,8 +489,8 @@ const SwipeScreen = props => {
               renderNewMatch={renderNewMatch}
               canUserSwipe={canUserSwipe}
               // @burzacoding
-              // limitExcedeed={limitExcedeed}
-              limitExcedeed={false}
+              limitExcedeed={limitExcedeed}
+              // limitExcedeed={false}
             />
           )}
 

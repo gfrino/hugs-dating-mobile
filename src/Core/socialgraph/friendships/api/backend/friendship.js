@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage'
 
-// const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 
 export const subscribeToInboundFriendships = (userId, callback) => {
   AsyncStorage.getItem('jwt_token', (_error, token) => {

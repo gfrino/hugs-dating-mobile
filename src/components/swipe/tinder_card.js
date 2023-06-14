@@ -8,7 +8,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const TinderCard = props => {
   const { url, name, age, school, distance, isRoomSwiper } = props
-
   const { theme } = useTheme()
   const { localized } = useTranslations()
 

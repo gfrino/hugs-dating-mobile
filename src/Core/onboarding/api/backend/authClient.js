@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
 import { ErrorCode } from '../../api/ErrorCode'
 
-// const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 
 const fetchUser = userID => {
   return new Promise((resolve, _reject) => {

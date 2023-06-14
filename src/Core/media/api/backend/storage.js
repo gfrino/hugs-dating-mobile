@@ -2,8 +2,8 @@ import { Platform } from 'react-native'
 import { ErrorCode } from '../../../onboarding/api/ErrorCode'
 import { processMediaFile } from '../../mediaProcessor'
 
-// const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
-const baseAPIURL = 'http://localhost:3000/api/'
+const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
+// const baseAPIURL = 'http://localhost:3000/api/'
 
 const processAndUploadMediaFileWithProgressTracking = async (
   file,

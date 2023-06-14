@@ -75,7 +75,7 @@ function IMFormComponent(props) {
           <Text style={styles.text}>{formTextField.displayName}</Text>
           <TextInput
             underlineColorAndroid="transparent"
-            style={[styles.text, { textAlign: 'right' }]}
+            style={[styles.text, { textAlign: 'right', flex: 1 }]}
             editable={formTextField.editable}
             onChangeText={text => {
               onFormFieldValueChange(formTextField, text)

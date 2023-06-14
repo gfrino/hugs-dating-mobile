@@ -91,6 +91,10 @@ const Deck = props => {
     handleSwipe('like', index)
   }
 
+  const onSwipedBottom = index => {
+    handleSwipe('like', index)
+  }
+
   const onSwipedAll = () => {
     onAllCardsSwiped()
   }
@@ -172,21 +176,21 @@ const Deck = props => {
 
   const renderCard = item => {
     if (item) {
-      return (
-        <TinderCard
-          key={'TinderCard' + item.id}
-          url={
-            item.profilePictureURL ||
-            getDefaultProfilePicture(item?.userCategory)
-          }
-          name={item.firstName}
-          age={item.age}
-          school={item.school}
-          distance={item.distance}
-          setShowMode={setShowMode}
-          isRoomSwiper={isRoomSwiper}
-        />
-      )
+        return (
+          <TinderCard
+            key={'TinderCard' + item.id}
+            url={
+              item.profilePictureURL ||
+              getDefaultProfilePicture(item?.userCategory)
+            }
+            name={item.firstName}
+            age={item.age}
+            school={item.school}
+            distance={item.distance}
+            setShowMode={setShowMode}
+            isRoomSwiper={isRoomSwiper}
+          />
+        )
     }
   }
 
@@ -267,6 +271,7 @@ const Deck = props => {
         onSwipedTop={onSwipedTop}
         onSwipedLeft={onSwipedLeft}
         onSwipedAll={onSwipedAll}
+        onSwipedBottom={onSwipedBottom}
         swipeBackCard={true}
         overlayLabels={{
           left: {

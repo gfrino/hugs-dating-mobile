@@ -296,5 +296,7 @@
   "Display in Full Screen": "Affichage en plein écran",
   "Filter objectionable material": "Filtrer le matériel offensant",
   "With disabilities":"Avec handicap",
-  "Without disabilities":"Sans handicap"
+  "Without disabilities":"Sans handicap",
+  "Daily swipes exceeded": "Dépassement des balayages quotidiens",
+  "You have exceeded the daily swipes limit. Upgrade your account now to enjoy unlimited swipes": "Vous avez dépassé la limite quotidienne de balayages. Mettez à niveau votre compte maintenant pour profiter de balayages illimités"
 }

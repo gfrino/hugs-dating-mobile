@@ -10,6 +10,7 @@ buildscript {
         googlePlayServicesAuthVersion = "16.0.1"
         playServicesVersion = "18.0.1"
         androidMapsUtilsVersion = "2.3.0"
+        kotlinVersion = "1.6.0"
     }
         repositories {
         google()
