@@ -19,7 +19,7 @@ const dynamicStyles = (theme, appearance) => {
           top: 50,
         },
         {
-          top: 12,
+          top: 40,
         },
       ),
       paddingVertical: 10,

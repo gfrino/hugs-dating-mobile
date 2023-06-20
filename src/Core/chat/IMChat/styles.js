@@ -41,7 +41,7 @@ const dynamicStyles = (theme, appearance, outBound) => {
       justifyContent: 'center',
       overflow: 'hidden',
       marginLeft: 8,
-      marginVertical: 16,
+      marginVertical: 0,
     },
     micIconContainer: {
       justifyContent: 'center',
@@ -56,10 +56,11 @@ const dynamicStyles = (theme, appearance, outBound) => {
       borderTopColor: colorSet.hairline,
       backgroundColor: colorSet.primaryBackground,
       flexDirection: 'row',
+      paddingHorizontal: 4,
     },
     progressBar: {
       backgroundColor: colorSet.primaryForeground,
-      height: 3,
+      height: 2,
       shadowColor: '#000',
       width: 0,
     },
@@ -78,17 +79,18 @@ const dynamicStyles = (theme, appearance, outBound) => {
       height: 17,
     },
     input: {
-      alignSelf: 'center',
-      justifyContent: 'center',
+      // alignSelf: 'center',
+      // justifyContent: 'center',
       alignItems: 'center',
       paddingVertical: 5,
       paddingLeft: 3,
       paddingRight: 20,
       width: '93%',
       fontSize: 16,
-      lineHeight: 22,
+      // lineHeight: 22,
       color: colorSet.primaryText,
-      flex: 1,
+      // flex: 1,
+      
     },
     inReplyToView: {
       backgroundColor: colorSet.primaryBackground,
@@ -136,7 +138,7 @@ const dynamicStyles = (theme, appearance, outBound) => {
       marginBottom: 10,
     },
     itemContent: {
-      padding: 10,
+      padding: 12,
       backgroundColor: colorSet.hairline,
       borderRadius: 10,
     },

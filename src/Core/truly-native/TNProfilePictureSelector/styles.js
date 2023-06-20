@@ -1,5 +1,6 @@
 import { Dimensions } from 'react-native'
 import { StyleSheet } from 'react-native'
+import { ScreenHeight } from 'react-native-elements/dist/helpers'
 
 const { height } = Dimensions.get('window')
 const imageSize = height * 0.14
@@ -48,12 +49,24 @@ const dynamicStyles = (theme, colorScheme) => {
       height: photoIconSize,
       borderRadius: photoIconSize,
     },
+    // closeButton: {
+    //   alignSelf: 'flex-end',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   marginTop: 40,
+    //   marginRight: 15,
+    //   backgroundColor: theme.colors[colorScheme].grey6,
+    //   width: 28,
+    //   height: 28,
+    //   borderRadius: 20,
+    //   overflow: 'hidden',
+    // },
     closeButton: {
-      alignSelf: 'flex-end',
+      position: 'absolute',
+      top: ScreenHeight - 720,
+      right: 15,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 40,
-      marginRight: 15,
       backgroundColor: theme.colors[colorScheme].grey6,
       width: 28,
       height: 28,

@@ -146,7 +146,8 @@ const TNProfilePictureSelector = props => {
             styles.imageContainer,
             profilePictureBorder[currentUser?.settings?.gender || "default"],
           ]}
-          onPress={() => handleProfilePictureClick(profilePictureURL)}>
+          onPress={() => handleProfilePictureClick(profilePictureURL)}
+          >
           <Image
             style={[styles.image]}
             source={{ uri: profilePictureURL || defaultAvatar }}

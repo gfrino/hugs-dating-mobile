@@ -246,7 +246,35 @@ const Deck = props => {
     )
   }
 
-  if (data.length === 0) {
+  const rangeLimit = () => {
+    if(isPlanActive) {
+      return data
+    } else {
+      const filteredData = data.filter(obj => {
+        const distanceString = obj.distance.split(' ')[0]; // Extract the distance value from the string
+        const distance = parseFloat(distanceString); // Convert the distance value to a number
+        return distance <= 62.1371;
+      });
+      return filteredData
+    }
+  }
+
+  const rangeResponse = rangeLimit();
+
+  if (!isPlanActive || rangeResponse.length === 0) {
+    return (
+      <View style={styles.textContainer}>
+        <Text style={{
+          fontSize: 14,
+          color: '#777777',
+          textAlign: 'center',}}>
+          {localized("There's no one new around you. Upgrade your subscription to increase searching radius")}
+        </Text>
+      </View>
+    )
+  }
+
+  if (data.length === 0 || rangeResponse.length === 0) {
     return <View style={styles.noMoreCards}>{renderEmptyState()}</View>
   }
 
@@ -256,7 +284,8 @@ const Deck = props => {
         ref={useSwiper}
         animateCardOpacity={true}
         containerStyle={styles.swiperContainer}
-        cards={data}
+        // cards={data}
+        cards={rangeResponse}
         renderCard={renderCard}
         cardIndex={0}
         backgroundColor="white"
@@ -389,6 +418,11 @@ const dynamicStyles = (
       height: SCREEN_HEIGHT,
       backgroundColor: 'white',
     },
+    textContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
   })
 
 export default Deck

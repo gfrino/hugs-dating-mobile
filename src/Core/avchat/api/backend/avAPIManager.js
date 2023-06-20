@@ -10,8 +10,8 @@ export default class AVAPIManager {
     this.activeCallDataUpdateCallback = null
     this.callConnectionDataCallback = null
 
-    // const socketRoot = 'https://codebaze.herokuapp.com';
-    const socketRoot = 'http://localhost:3000'
+    const socketRoot = 'https://codebaze.herokuapp.com';
+    // const socketRoot = 'http://localhost:3000'
     this.socket = io.connect(socketRoot, {
       transports: ['websocket'],
       jsonp: false,

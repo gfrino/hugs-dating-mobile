@@ -37,6 +37,8 @@ const IMConversationIconView = props => {
     setSecondImgErr(true)
   }
 
+  console.log("participants[0]", participants)
+
   return (
     <View style={styles.container}>
       {participants.length == 0 && (
@@ -50,7 +52,7 @@ const IMConversationIconView = props => {
       {participants.length === 1 && (
         <View style={style ? style : styles.singleParticipation}>
           <FastImage
-            style={[styles.singleChatItemIcon, imageStyle]}
+            style={[styles.singleChatItemIcon, imageStyle, { borderColor: participants[0].userCategory === 'no_disabilities' ? 'skyblue' : 'yellow' }]}
             onError={onImageError}
             source={imgErr ? { uri: defaultAvatar } : { uri: firstUri }}
           />

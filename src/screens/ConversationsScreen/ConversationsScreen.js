@@ -28,7 +28,6 @@ const ConversationsScreen = props => {
     setMatches(data)
   }
 
-
   const onEmptyStatePress = () => {
     props.navigation.navigate('Swipe')
   }

@@ -136,6 +136,8 @@ const SwipeScreen = props => {
     user?.location?.longitude,
   ])
 
+  console.log("prevDependecies", prevDependecies)
+
   useEffect(() => {
     // console.log({
     //   'Distance Radius': `${prevDependecies.current[0]} => ${user?.settings?.distance_radius}`,
@@ -323,6 +325,8 @@ const SwipeScreen = props => {
     }
   }
 
+  console.log("userRef", userRef)
+
   const handleNewMatchButtonTap = nextScreen => {
     setShowMode(0)
     setCurrentMatchData(null)
@@ -467,6 +471,7 @@ const SwipeScreen = props => {
 
   console.log("limitExcedeed", limitExcedeed)
   console.log("swipeCountDetail", swipeCountDetail.current.count)
+  console.log("hasConsumedRecommendationsStream", hasConsumedRecommendationsStream)
 
   return (
     <View style={styles.container}>

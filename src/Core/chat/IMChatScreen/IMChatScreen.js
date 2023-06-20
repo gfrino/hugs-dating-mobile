@@ -33,6 +33,7 @@ import {
   Text,
   Pressable
 } from 'react-native'
+import { getDefaultProfilePicture } from '~/helpers/statics'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -260,6 +261,7 @@ const IMChatScreen = props => {
       )
     )
   }
+
   const onDislikePressed = () => {
     // useSwiper.current.swipeLeft()
     console.log("asasas");
