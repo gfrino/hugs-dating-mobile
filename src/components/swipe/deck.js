@@ -247,6 +247,7 @@ const Deck = props => {
   }
 
   const rangeLimit = () => {
+    console.log("data", data)
     if(isPlanActive) {
       return data
     } else {
@@ -261,12 +262,13 @@ const Deck = props => {
 
   const rangeResponse = rangeLimit();
 
-  if (!isPlanActive || rangeResponse.length === 0) {
+  if (!isPlanActive && rangeResponse.length === 0) {
     return (
       <View style={styles.textContainer}>
         <Text style={{
           fontSize: 14,
           color: '#777777',
+          paddingHorizontal: 12,
           textAlign: 'center',}}>
           {localized("There's no one new around you. Upgrade your subscription to increase searching radius")}
         </Text>

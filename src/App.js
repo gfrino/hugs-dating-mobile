@@ -47,6 +47,6 @@ App.propTypes = {}
 
 App.defaultProps = {}
 
-// AppRegistry.registerComponent('App', () => App)
+AppRegistry.registerComponent('HugsDating', () => App)
 
 export default App
