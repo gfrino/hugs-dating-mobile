@@ -246,23 +246,7 @@ const Deck = props => {
     )
   }
 
-  const rangeLimit = () => {
-    console.log("data", data)
-    if(isPlanActive) {
-      return data
-    } else {
-      const filteredData = data.filter(obj => {
-        const distanceString = obj.distance.split(' ')[0]; // Extract the distance value from the string
-        const distance = parseFloat(distanceString); // Convert the distance value to a number
-        return distance <= 62.1371;
-      });
-      return filteredData
-    }
-  }
-
-  const rangeResponse = rangeLimit();
-
-  if (!isPlanActive && rangeResponse.length === 0) {
+  if (!isPlanActive && data.length === 0) {
     return (
       <View style={styles.textContainer}>
         <Text style={{
@@ -276,7 +260,7 @@ const Deck = props => {
     )
   }
 
-  if (data.length === 0 || rangeResponse.length === 0) {
+  if (data.length === 0) {
     return <View style={styles.noMoreCards}>{renderEmptyState()}</View>
   }
 
@@ -286,8 +270,7 @@ const Deck = props => {
         ref={useSwiper}
         animateCardOpacity={true}
         containerStyle={styles.swiperContainer}
-        // cards={data}
-        cards={rangeResponse}
+        cards={data}
         renderCard={renderCard}
         cardIndex={0}
         backgroundColor="white"

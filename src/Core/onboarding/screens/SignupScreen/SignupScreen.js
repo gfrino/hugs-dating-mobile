@@ -218,7 +218,7 @@ const SignupScreen = props => {
     <View style={styles.container}>
       <KeyboardAwareScrollView
         style={{ flex: 1, width: '100%' }}
-        contentInset={{ bottom: 8 }}
+        // contentInset={{ bottom: 8 }}
         keyboardShouldPersistTaps="always">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image style={styles.backArrowStyle} source={theme.icons.backArrow} />

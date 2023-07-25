@@ -238,7 +238,7 @@ const SwipeScreen = props => {
     let now = Date.now();
     let createdAt = now;
 
-    console.log("qweqwe", swipeCountDetail);
+    console.log("swipeCountDetail", swipeCountDetail);
     // if (swipeCountDetail?.createdAt?.seconds) {
     // if (swipeCountDetail?.createdAt) {
     //   createdAt = +new Date(swipeCountDetail.createdAt * 1000)

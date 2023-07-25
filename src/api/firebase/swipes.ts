@@ -27,6 +27,7 @@ const recommendationsRef = firebase
   .collection('dating_recommendations')
 
 const swipeCountRef = firebase.firestore().collection('swipe_counts')
+const userSubRef = firebase.firestore().collection('subscriptions')
 const datingRecRef = firebase.firestore().collection('dating_recommendations')
 
 const onCollectionUpdate = (
@@ -170,15 +171,24 @@ export const fetchRecommendations = async (user: IUser) => {
       .doc(user.id)
       .collection('recommendations')
       .orderBy(fieldPath, 'desc')
-      .limit(20)
+      // .limit(20)
 
+    const userSubscription = await userSubRef.doc(user.id).get()
     const snapshot = await mydatingRecRef.get({
       source: 'server',
     })
 
-    const data = snapshot.docs.map(doc => doc.data())
+    let data = snapshot.docs.map(doc => doc.data())
 
-    return data
+    if(userSubscription.exists) {
+      return data
+      } else {
+        return data.filter(obj => {
+          const distanceString = obj.distance.split(' ')[0]; // Extract the distance value from the string
+          const distance = parseFloat(distanceString); // Convert the distance value to a number
+          return distance <= 62.1371;
+        });
+      }
   } catch (error) {
     console.error('ERROR [fetchRecommendations]', error)
     return []
