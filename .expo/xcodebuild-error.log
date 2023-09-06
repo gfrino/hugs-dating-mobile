@@ -1,0 +1,6 @@
+** BUILD FAILED **
+
+
+The following build commands failed:
+	CompileC /Users/macbookpro/Library/Developer/Xcode/DerivedData/HugsDating-fbgdpfbzeopwkqfqyfhomuvjykkv/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/RNFBMessaging.build/Objects-normal/x86_64/RNFBMessagingSerializer.o /Users/macbookpro/Thirtynorth/pizza-projects/hugs-dating-mobile/node_modules/@react-native-firebase/messaging/ios/RNFBMessaging/RNFBMessagingSerializer.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler (in target 'RNFBMessaging' from project 'Pods')
+(1 failure)
