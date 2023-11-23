@@ -12,14 +12,14 @@ const dynamicStyles = (theme, appearance) => {
     //
     navBarContainer: {
       flexDirection: 'row',
-      position: 'absolute',
+      // position: 'absolute',
       justifyContent: 'center',
       ...ifIphoneX(
         {
           top: 50,
         },
         {
-          top: 40,
+          top: 20,
         },
       ),
       paddingVertical: 10,

@@ -50,14 +50,40 @@ const dynamicStyles = (theme, colorScheme) => {
       alignSelf: 'flex-end',
       backgroundColor: colorSet.hairline,
     },
+    inputSectionDivider: {
+      height: 0.5,
+      width: '96%',
+      alignSelf: 'flex-end',
+      // backgroundColor: colorSet.hairline,
+    },
     text: {
       fontSize: 14,
       color: colorSet.primaryText,
       padding: 4,
+     
+    },
+
+    inputFieldStyle:{
+      borderColor : "#eb5a6d",
+      borderWidth: 1,
+      borderRadius:10,
+      padding:10,
+      paddingLeft: 15,
+     
     },
     appSettingsTypeContainer: {
       flexDirection: 'row',
       borderBottomWidth: 0,
+      justifyContent: 'space-between',
+      paddingHorizontal: 15,
+    },
+    selectFieldStyle : {
+      borderBottomWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 50,
+      marginVertical: 2,
+      flexDirection: 'row',
       justifyContent: 'space-between',
       paddingHorizontal: 15,
     },

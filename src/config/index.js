@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useTranslations } from 'dopenative'
-
+import { useSelector } from 'react-redux'
 const regexForNames = /^[a-zA-Z]{2,25}$/
 const regexForPhoneNumber = /\d{9}$/
 const regexForAge = /[0-9]/g
@@ -9,6 +9,8 @@ export const ConfigContext = React.createContext({})
 
 export const ConfigProvider = ({ children }) => {
   const { localized } = useTranslations()
+  const isPremium = useSelector(state => state.inAppPurchase.isPlanActive)
+ console.log("isPremium......" , isPremium);
   const config = {
     isSMSAuthEnabled: false,
     appIdentifier: 'hugs-datings-android',
@@ -222,19 +224,29 @@ export const ConfigProvider = ({ children }) => {
             {
               displayName: localized('Distance Radius'),
               type: 'select',
-              options: ['5', '10', '15', '25', '50', '100', 'unlimited'],
-              displayOptions: [
-                `5 ${localized('miles')}`,
-                `10 ${localized('miles')}`,
-                `15 ${localized('miles')}`,
-                `25 ${localized('miles')}`,
-                `50 ${localized('miles')}`,
-                `100 ${localized('miles')}`,
-                localized('Unlimited'),
-              ],
+              options: ['5', '10', '15', '25', '50', '100', (!isPremium && 'unlimited')],
+                displayOptions: (!isPremium) ? [
+                  `5 ${localized('miles')}`,
+                  `10 ${localized('miles')}`,
+                  `15 ${localized('miles')}`,
+                  `25 ${localized('miles')}`,
+                  `50 ${localized('miles')}`,
+                  `100 ${localized('miles')}`,
+                ] : [
+                  `5 ${localized('miles')}`,
+                  `10 ${localized('miles')}`,
+                  `15 ${localized('miles')}`,
+                  `25 ${localized('miles')}`,
+                  `50 ${localized('miles')}`,
+                  `100 ${localized('miles')}`,
+                  localized('Unlimited') 
+
+                ],
+              
+              
               editable: true,
               key: 'distance_radius',
-              value: 'Unlimited',
+              value: '100',
             },
             {
               displayName: localized('Gender'),
@@ -349,7 +361,7 @@ export const ConfigProvider = ({ children }) => {
       ],
     },
     dailySwipeLimit: 50, //:TODO Daily limit
-    totalSwipeLimit: 1,
+    totalSwipeLimit: 10,
     subscriptionSlideContents: [
       {
         title: localized('Go VIP'),

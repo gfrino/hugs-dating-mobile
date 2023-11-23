@@ -67,15 +67,16 @@ function IMFormComponent(props) {
   const renderTextField = (formTextField, index, totalLen) => {
     return (
       <View key={index}>
+          <Text style={[styles.text , {marginLeft:10, fontWeight:"500", marginTop:5}]}>{formTextField.displayName}</Text>
         <View
           style={[
             styles.settingsTypeContainer,
             styles.appSettingsTypeContainer,
-          ]}>
-          <Text style={styles.text}>{formTextField.displayName}</Text>
+          ]}
+          >
           <TextInput
             underlineColorAndroid="transparent"
-            style={[styles.text, { textAlign: 'right', flex: 1 }]}
+            style={[styles.text, styles.inputFieldStyle , {  flex: 1 }]}
             editable={formTextField.editable}
             onChangeText={text => {
               onFormFieldValueChange(formTextField, text)
@@ -85,7 +86,7 @@ function IMFormComponent(props) {
             value={computeValue(formTextField)}
           />
         </View>
-        {index < totalLen - 1 && <View style={styles.divider} />}
+        {index < totalLen - 1 && <View style={styles.inputSectionDivider} />}
       </View>
     )
   }
@@ -136,8 +137,9 @@ function IMFormComponent(props) {
             : onSelectFieldPress(selectField, actionSheetRef)
         }}
         style={[
-          styles.settingsTypeContainer,
-          styles.appSettingsTypeContainer,
+          
+          styles.selectFieldStyle,
+          styles.inputFieldStyle,{marginBottom:10 , marginLeft : 15 , marginRight:15},
           {
             opacity:
               selectField.key === 'category_preference'
@@ -167,8 +169,8 @@ function IMFormComponent(props) {
       <Fragment key={index}>
         <TouchableOpacity
           style={[
-            styles.settingsTypeContainer,
-            styles.appSettingsTypeContainer,
+            styles.selectFieldStyle,
+            styles.inputFieldStyle,{marginBottom:10 , marginTop: 10 , marginLeft : 15 , marginRight:15},
             { opacity: isPremium ? 1 : 0.5 },
           ]}
           onPress={

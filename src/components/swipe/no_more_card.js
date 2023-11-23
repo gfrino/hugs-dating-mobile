@@ -5,9 +5,14 @@ import { useTranslations } from 'dopenative'
 import FastImage from 'react-native-fast-image'
 import { size } from '../../helpers/devices'
 import { profilePictureBorder  } from '../../helpers/statics'
+import dynamicStyles from '../../Core/chat/IMConversationView/IMConversationIconView/styles'
 
 const NoMoreCard = ({ user, isFromRooms = false }) => {
   const { localized } = useTranslations()
+  const styleProfile = dynamicStyles(theme, appearance)
+  const defaultAvatar =
+  'https://firebasestorage.googleapis.com/v0/b/hugs-datings.appspot.com/o/cactus-undefined.png?alt=media&token=2745ab3f-c9ef-40de-8f7b-f59154a234b5'
+
   const canComputeRecommendations = React.useMemo(() => {
     const { firstName, email, phone, profilePictureURL } = user
     return (
@@ -19,12 +24,20 @@ const NoMoreCard = ({ user, isFromRooms = false }) => {
 
   return (
     <View style={styles.container}>
-      {user.profilePictureURL ? (
+      {user.profilePictureURL && (
+      <View style={styleProfile.swipeScreenMAin} >
+        
         <FastImage
-          source={{ uri: user.profilePictureURL }}
-          style={[styles.user_pic_style, profilePictureBorder[user?.settings?.gender || "default"]]}
-        />
-      ) : null}
+              // style={[styleProfile.swipeScreenItemIcon , { borderColor: user.userCategory === 'no_disabilities' ? 'skyblue' : 'yellow' }]}
+              // onError={onImageError}
+              style={[styleProfile.swipeScreenItemIcon, { borderColor: user.userCategory === 'no_disabilities' ? 'skyblue' : 'yellow' }]}
+  
+              source={user.profilePictureURL ? { uri: user.profilePictureURL } : { uri: defaultAvatar }}
+            />
+            {user.isOnline && <View style={styleProfile.SwipeScreenOnlineMark} />}
+          </View>
+      
+      )}
 
       {canComputeRecommendations ? (
         <Text style={styles.empty_state_text_style}>

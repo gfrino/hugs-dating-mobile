@@ -127,6 +127,21 @@ const SwipeScreen = props => {
     }
   }, [isComputing])
 
+  const MINUTE_MS = 65000;
+  useEffect(() => {
+  const interval = setInterval(() => {
+    console.log("canUserSwipe Before" , canUserSwipe);
+    console.log('Logs every 10 seconds');
+      resetSwipeCountDetail()
+      updateSwipeCountDetail()
+      setCanUserSwipe(true)
+    console.log("canUserSwipe after" , canUserSwipe);
+    
+  }, MINUTE_MS);
+
+  return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+}, [])
+
   const prevDependecies = useRef([
     user?.settings?.distance_radius,
     user?.settings?.gender_preference,
@@ -198,6 +213,7 @@ const SwipeScreen = props => {
 
     const swipeCountInfo = await swipeTracker.current.getUserSwipeCount(userID)
 
+    console.log("swipeCountInfo....." , swipeCountInfo);
     if (swipeCountInfo) {
       swipeCountDetail.current = swipeCountInfo
     } else {
@@ -238,13 +254,18 @@ const SwipeScreen = props => {
     let now = Date.now();
     let createdAt = now;
 
-    console.log("swipeCountDetail", swipeCountDetail);
+  
     // if (swipeCountDetail?.createdAt?.seconds) {
     // if (swipeCountDetail?.createdAt) {
     //   createdAt = +new Date(swipeCountDetail.createdAt * 1000)
     // }
     if (swipeCountDetail?.createdAt) {
       createdAt = new Date(swipeCountDetail.createdAt * 1000).getTime();
+      let created = new Date((swipeCountDetail.createdAt * 1000) + 10000).getTime();
+
+    console.log("createdAt......", createdAt);
+    console.log("created..." , created);
+
     }
     return now - createdAt
   }
@@ -255,7 +276,8 @@ const SwipeScreen = props => {
       return true
     }
 
-    const oneDay = 24 * 60 * 60 * 1000
+    // const oneDay = 24 * 60 * 60 * 1000
+    const oneDay = 65000
     const swipeTimeDifference = getSwipeTimeDifference(swipeCountDetail.current)
 
     console.log("isGreater", swipeTimeDifference > oneDay)
@@ -393,7 +415,6 @@ const SwipeScreen = props => {
 
   const onSwipe = async (type, swipeItem) => {
     const canSwipe = getCanUserSwipe()
-
     if (!canSwipe) {
       return
     }

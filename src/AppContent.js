@@ -25,13 +25,13 @@ export default AppContent = () => {
 
   const { theme, appearance } = useTheme()
 
-
   return (
     <ProfileConfigProvider config={config}>
       <OnboardingConfigProvider config={config}>
         <IAPConfigProvider config={config}>
           <IAPManagerWrapped>
-            <StatusBar backgroundColor={"transparent"} translucent={true} />
+          {/* translucent={true} */}
+            <StatusBar backgroundColor={"#eb5a6d"} />
             <MainNavigator />
           </IAPManagerWrapped>
         </IAPConfigProvider>

@@ -63,8 +63,8 @@ const dynamicStyles = (theme, colorScheme) => {
     // },
     closeButton: {
       position: 'absolute',
-      top: ScreenHeight - 720,
-      right: 15,
+      top: ScreenHeight - 650,
+      right: 10,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: theme.colors[colorScheme].grey6,

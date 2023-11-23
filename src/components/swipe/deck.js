@@ -16,6 +16,13 @@ import BottomTabBar from './bottom_tab_bar'
 import CardDetailsView from './CardDetailsView/CardDetailsView'
 import { getDefaultProfilePicture, IS_ANDROID } from '../../helpers/statics'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import FastImage from 'react-native-fast-image'
+// import { profilePictureBorder  } from '../../helpers/statics'
+import dynamicStyles from '../../Core/chat/IMConversationView/IMConversationIconView/styles'
+import { useTheme } from 'dopenative'
+
+
+
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -39,7 +46,16 @@ const Deck = props => {
 
   const { localized } = useTranslations()
   const isPlanActive = useSelector(state => state.inAppPurchase.isPlanActive)
+  const user = useSelector(state => state.auth.user)
+  const { theme, appearance } = useTheme()
 
+  const defaultAvatar =
+  'https://firebasestorage.googleapis.com/v0/b/hugs-datings.appspot.com/o/cactus-undefined.png?alt=media&token=2745ab3f-c9ef-40de-8f7b-f59154a234b5'
+
+
+  const styleProfile = dynamicStyles(theme, appearance)
+
+  console.log("user...././././././." , user);
   const useSwiper = useRef(null)
   const hasActivePlan = useRef(false)
   const currentDeckIndex = useRef(0)
@@ -172,7 +188,7 @@ const Deck = props => {
     )
   }
 
-  const styles = dynamicStyles(safeAreas.top, safeAreas.bottom, isRoomSwiper)
+  const styles = dynamicStylesss(safeAreas.top, safeAreas.bottom, isRoomSwiper)
 
   const renderCard = item => {
     if (item) {
@@ -249,13 +265,30 @@ const Deck = props => {
   if (!isPlanActive && data.length === 0) {
     return (
       <View style={styles.textContainer}>
+<>
+      {
+        <View style={styleProfile.swipeScreenMAin} >
+        
+      <FastImage
+            // style={[styleProfile.swipeScreenItemIcon , { borderColor: user.userCategory === 'no_disabilities' ? 'skyblue' : 'yellow' }]}
+            // onError={onImageError}
+            style={[styleProfile.swipeScreenItemIcon, { borderColor: user.userCategory === 'no_disabilities' ? 'skyblue' : 'yellow' }]}
+
+            source={user.profilePictureURL ? { uri: user.profilePictureURL } : { uri: defaultAvatar }}
+          />
+          {user.isOnline && <View style={styleProfile.SwipeScreenOnlineMark} />}
+        </View>
+      }
         <Text style={{
           fontSize: 14,
           color: '#777777',
           paddingHorizontal: 12,
+          marginTop: 10,
           textAlign: 'center',}}>
           {localized("There's no one new around you. Upgrade your subscription to increase searching radius")}
         </Text>
+        
+        </>
       </View>
     )
   }
@@ -339,7 +372,7 @@ const Deck = props => {
   )
 }
 
-const dynamicStyles = (
+const dynamicStylesss = (
   safeAreaTop = 0,
   safeAreaBottom = 0,
   isRoomSwiper = false,

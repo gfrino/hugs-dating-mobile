@@ -34,6 +34,7 @@ function IMLocationSelectorModal(props) {
     ...locationDelta,
   })
   const [address, setAddress] = useState(' ')
+// console.log("setAddress..." , address);
 
   const mapRef = useRef<MapView | null>(null)
 

@@ -56,7 +56,7 @@ const IMConversationIconView = props => {
             onError={onImageError}
             source={imgErr ? { uri: defaultAvatar } : { uri: firstUri }}
           />
-          {participants[0].isOnline && <View style={styles.onlineMark} />}
+          {participants.isOnline && <View style={styles.onlineMark} />}
         </View>
       )}
       {participants.length > 1 && (

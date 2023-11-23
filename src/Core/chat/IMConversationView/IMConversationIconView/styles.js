@@ -34,6 +34,31 @@ const dynamicStyles = (theme, appearance) => {
       right: 1.5,
       bottom: 1,
     },
+
+    swipeScreenMAin : {
+      position: "relative",
+      objectFit: "cover",
+    },
+    swipeScreenItemIcon: {
+      borderWidth: 3,
+      width: 90,
+      height: 90,
+      borderRadius: 45,
+    
+    },
+
+    SwipeScreenOnlineMark: {
+      position : "absolute",
+      backgroundColor: '#4acd1d',
+      height: ONLINE_MARK_WIDTH,
+      width: ONLINE_MARK_WIDTH,
+      borderRadius: ONLINE_MARK_WIDTH / 2,
+      borderWidth: RADIUS_BORDER_WIDTH,
+      borderColor: colorSet.primaryBackground,
+    right:15,
+    bottom: 1.5
+    },
+
     noDisabilitesMark: {
       position: 'absolute',
       backgroundColor: 'blue',
