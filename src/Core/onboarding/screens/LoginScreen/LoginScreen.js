@@ -47,7 +47,6 @@ const LoginScreen = props => {
         config,
       )
       .then(response => {
-        console.log("response", response);
         if (response?.user) {
           const user = response.user
           const hasCategory = user.userCategory ? true : false

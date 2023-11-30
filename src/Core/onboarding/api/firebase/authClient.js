@@ -457,11 +457,13 @@ export const fetchAndStorePushTokenIfPossible = async user => {
     const settings = await messaging().requestPermission()
     if (settings) {
       const token = await messaging().getToken()
-      updateUser(user.id || user.userID, {
+      console.log("Fcm Token from authClient.fireBase" , token);
+      const data = await updateUser(user.id || user.userID, {
         pushToken: token,
         pushKitToken: '',
         badgeCount: 0,
       })
+      console.log('success....' , data);
     }
 
     // VIDEO_CALL_FLAG_ENABLED_BEGIN

@@ -4,7 +4,7 @@ import { getUnixTimeStamp } from '../../../helpers/timeFormat'
 const usersRef = firestore().collection('users')
 
 export const updateUser = async (userID, newData) => {
-  console.log('updateUser', userID, newData)
+  console.log('updateUser.....................', userID, newData)
   const dataWithOnlineStatus = {
     ...newData,
     lastOnlineTimestamp: getUnixTimeStamp(),
@@ -13,7 +13,7 @@ export const updateUser = async (userID, newData) => {
     await usersRef.doc(userID).set({ ...dataWithOnlineStatus }, { merge: true })
     return { success: true }
   } catch (error) {
-    console.log('ERROR [updateUser]', error)
+    console.log('ERROR [updateUser].,.,.,.,.,.,.,.,.,.========================', error)
     return error
   }
 }
@@ -22,6 +22,7 @@ export const getUserByID = async userID => {
   try {
     const document = await usersRef.doc(userID).get()
     if (document) {
+      console.log('getUserByID....' , document.data);
       return document.data()
     }
     return null

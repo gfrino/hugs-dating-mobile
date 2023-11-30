@@ -13,6 +13,7 @@ const IMNotificationScreen = props => {
 
   const user = useCurrentUser()
   const notifications = useSelector(state => state.notifications.notifications)
+  console.log("notifications......=============" , notifications);
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {

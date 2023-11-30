@@ -24,7 +24,7 @@ function MessageThread(props) {
 
   const [isParticipantTyping, setIsParticipantTyping] = useState(false)
   const isTypingTimeOutID = useRef(); 
-  console.log(getUnixTimeStamp());
+  // console.log(getUnixTimeStamp());
   useEffect(() => {
     if (channelItem?.typingUsers) {
       const typingUsers = getUsersTyping()

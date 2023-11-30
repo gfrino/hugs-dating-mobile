@@ -1,27 +1,37 @@
-import React, { useRef, memo } from 'react'
+import React, { useRef, memo, useEffect } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { useTheme } from 'dopenative'
 import FastImage from 'react-native-fast-image'
 import dynamicStyles from './styles'
+// import { storeToken } from '../../../chat/redux'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const defaultAvatar =
   'https://firebasestorage.googleapis.com/v0/b/hugs-datings.appspot.com/o/cactus-undefined.png?alt=media&token=2745ab3f-c9ef-40de-8f7b-f59154a234b5'
 
-function StoryItem(props) {
-  const {
-    item,
-    index,
-    onPress,
-    containerStyle,
-    imageStyle,
-    imageContainerStyle,
-    textStyle,
-    activeOpacity,
-    title,
-    showOnlineIndicator,
-    displayVerifiedBadge,
-  } = props
+  
+  function StoryItem(props) {
+    const {
+      item,
+      index,
+      onPress,
+      containerStyle,
+      imageStyle,
+      imageContainerStyle,
+      textStyle,
+      activeOpacity,
+      title,
+      showOnlineIndicator,
+      displayVerifiedBadge,
+    } = props
+    
+    // const dispatch = useDispatch()
 
+  // useEffect(() => {
+  //   console.log("itemmmmmmm" , item);
+  //   dispatch(storeToken(item))
+  // },[])
   const refs = useRef()
 
   const { theme, appearance } = useTheme()
@@ -50,7 +60,7 @@ function StoryItem(props) {
               styles.text,
               textStyle,
             ]}>{`${item.firstName} ${lastName}`}</Text>
-          {console.log(item)}
+          {console.log(item) }
           {displayVerifiedBadge &&
             item.isVerified &&
             (item.username !== 'My Story' || item.username !== 'Add Story') && (

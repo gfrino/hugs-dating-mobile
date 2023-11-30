@@ -263,9 +263,6 @@ const SwipeScreen = props => {
       createdAt = new Date(swipeCountDetail.createdAt * 1000).getTime();
       let created = new Date((swipeCountDetail.createdAt * 1000) + 10000).getTime();
 
-    console.log("createdAt......", createdAt);
-    console.log("created..." , created);
-
     }
     return now - createdAt
   }

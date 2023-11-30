@@ -441,6 +441,7 @@ export const fetchAndStorePushTokenIfPossible = async user => {
     const settings = await messaging().requestPermission()
     if (settings) {
       const token = await messaging().getToken()
+      console.log("Fcm Token from authClient.backend" , token);
       updateUser(user.id || user.userID, {
         pushToken: token,
         pushKitToken: '',

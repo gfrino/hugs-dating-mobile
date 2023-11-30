@@ -37,7 +37,7 @@ const IMConversationIconView = props => {
     setSecondImgErr(true)
   }
 
-  console.log("participants[0]", participants)
+  // console.log("participants[0]", participants)
 
   return (
     <View style={styles.container}>

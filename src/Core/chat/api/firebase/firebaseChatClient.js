@@ -134,6 +134,8 @@ export const sendMessage = async (
   }
 
   const instance = functions().httpsCallable('insertMessage')
+
+
   try {
     const res = await instance({
       channelID: channel?.id,
@@ -145,6 +147,7 @@ export const sendMessage = async (
     console.log(error)
     return null
   }
+  
 }
 
 export const deleteMessage = async (channel, messageID) => {

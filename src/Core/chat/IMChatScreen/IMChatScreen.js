@@ -45,6 +45,8 @@ const IMChatScreen = props => {
   const dispatch = useDispatch()
   const { unblockUser } = useUserReportingMutations()
 
+
+  
   const safeAreas = useSafeAreaInsets()
 
   const { navigation, route } = props
@@ -115,11 +117,10 @@ const IMChatScreen = props => {
   useEffect(() => {
     const hydratedChannel = channelWithHydratedOtherParticipants(
       route.params.channel,
-    )
+      )
     if (!hydratedChannel) {
       return
     }
-
     setChannel(hydratedChannel)
     subscribeMessagesRef.current = subscribeToMessages(hydratedChannel?.id)
     const unsubscribe = subscribeToSingleChannel(hydratedChannel?.id)
@@ -230,7 +231,7 @@ const IMChatScreen = props => {
   }
 
   const renderCardDetail = (item, isDone) => {
-    {console.log("channel.otherParticipants",item)}
+    // {console.log("channel.otherParticipants",item)}
     if (item == null) {
       return false;
     }
@@ -446,7 +447,9 @@ const IMChatScreen = props => {
   }
 
   const onSendInput = async () => {
+    console.log("onSendInput...........");
     if (messages?.length > 0 || channel?.otherParticipants?.length > 1) {
+      console.log("inside....onSendInput");
       await sendMessage()
       return
     }
@@ -455,6 +458,7 @@ const IMChatScreen = props => {
     setLoading(true)
     const newChannel = await createOne2OneChannel()
     if (newChannel) {
+      console.log("helloooooo 22222");
       await sendMessage(newChannel)
     }
     setLoading(false)
@@ -474,6 +478,7 @@ const IMChatScreen = props => {
   }
 
   const sendMessage = async (newChannel = channel) => {
+    console.log("sendMessage...");
     const tempInputValue = inputValue
     const tempInReplyToItem = inReplyToItem
     const participantProfilePictureURLs = getParticipantPictures()
@@ -488,18 +493,21 @@ const IMChatScreen = props => {
       tempInReplyToItem,
       participantProfilePictureURLs,
     )
+    console.log("response.sendMessage" , response);
     if (response?.error) {
       alert(error)
       setInputValue(tempInputValue)
       setInReplyToItem(tempInReplyToItem)
     } else {
+      console.log("response");
       setDownloadObject(null)
       broadcastPushNotifications(tempInputValue, downloadObject)
     }
   }
 
-  const broadcastPushNotifications = (inputValue, downloadObject) => {
+  const broadcastPushNotifications = async (inputValue, downloadObject) => {
     const participants = channel.otherParticipants
+    console.log("participants........." , participants);
     if (!participants || participants.length == 0) {
       return
     }
@@ -542,15 +550,19 @@ const IMChatScreen = props => {
       message = inputValue
     }
 
-    participants.forEach(participant => {
+   participants.forEach(participant => {
+      console.log("chat message ..........");
+      console.log("participant//////////" , participant);
+      
       if (participant.id !== currentUser.id) {
-        notificationManager.sendPushNotification(
+          notificationManager.sendPushNotification(
           participant,
           fromTitle,
           message,
           'chat_message',
           { channelID: channel.id },
         )
+        
       }
     })
   }

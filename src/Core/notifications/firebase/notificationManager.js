@@ -1,15 +1,18 @@
 import { firebase } from '@react-native-firebase/firestore'
-import { updateUser, getUserByID } from '../../users'
+import { updateUser, getUserByID , getUsersByIDs } from '../../users'
 import { getUnixTimeStamp } from '../../helpers/timeFormat'
+import {inspect} from 'util'
+
 
 const notificationsRef = firebase.firestore().collection('notifications')
-
 const fcmURL = 'https://fcm.googleapis.com/fcm/send'
 const firebaseServerKey =
-  'AAAATiZitNY:APA91bEQ0354nB0Zkmo1XZXhzRHv9VnTuEahZkCGl1BJUteYhpcyksIV4Y0PIcZvdIJykfZeD70rHdIdQgMdWwnQNyVvkfiG7pjDihMXyYub9SiJ3izateFFeFFZBTRfgBgHKMu3tlRy'
+  'Key=AAAATiZitNY:APA91bEQ0354nB0Zkmo1XZXhzRHv9VnTuEahZkCGl1BJUteYhpcyksIV4Y0PIcZvdIJykfZeD70rHdIdQgMdWwnQNyVvkfiG7pjDihMXyYub9SiJ3izateFFeFFZBTRfgBgHKMu3tlRy'
 
+  
 const handleUserBadgeCount = async userID => {
   const user = await getUserByID(userID)
+
   const newBadgeCount = (user?.badgeCount ?? 0) + 1
   updateUser(userID, { badgeCount: newBadgeCount })
   return newBadgeCount
@@ -23,23 +26,30 @@ const sendPushNotification = async (
   metadata = {},
 ) => {
 
-  if (metadata && metadata.outBound && toUser.id == metadata.outBound.id) {
+  console.log("sent push notifications" , toUser?.id)
+  const user = await getUserByID(toUser?.id)
+
+
+
+  if (metadata && metadata.outBound && user.id == metadata.outBound.id) {
+
     return
   }
-  if (toUser.settings && toUser.settings.push_notifications_enabled == false) {
+  if (user.settings && user.settings.push_notifications_enabled == false) {
+
     return
   }
-  const recipientData = toUser; 
+  const recipientData = user; 
   if (!recipientData || !recipientData?.pushToken) {
     return
   }
 
   const notification = {
-    toUserID: toUser.id,
+    toUserID: user.id,
     title,
     body,
     metadata,
-    toUser,
+    user,
     type,
     seen: false,
   }
@@ -47,12 +57,14 @@ const sendPushNotification = async (
     ...notification,
     createdAt: getUnixTimeStamp(),
   })
+  console.log('ref' , ref.id);
   notificationsRef.doc(ref.id).update({ id: ref.id })
 
-  const userBadgeCount = await handleUserBadgeCount(toUser.id || toUser.userID)
+  const userBadgeCount = await handleUserBadgeCount(user.id || user.userID)
 
   const pushNotification = {
     to: recipientData.pushToken,
+   
     direct_boot_ok : true,
     notification: {
       title: title,
@@ -60,19 +72,24 @@ const sendPushNotification = async (
       sound: 'default',
       badge: userBadgeCount,
     },
-    data: { type, toUserID: toUser.id, ...metadata },
+    data: { type, toUserID: user.id, ...metadata },
     priority: 'high',
   }
+  console.log('pushNotifications.......' , pushNotification);
 
-  fetch(fcmURL, {
+  const data = await fetch(fcmURL, {
     method: 'post',
     headers: new Headers({
-      Authorization: 'key=' + firebaseServerKey,
+      Authorization: firebaseServerKey,
       'Content-Type': 'application/json',
     }),
     body: JSON.stringify(pushNotification),
   })
-  console.log('sent push notifications ' + body + ' to ' + toUser.pushToken)
+  console.log('data......' , data);
+  const r = await data.json()
+  console.log('notification status...' , r);
+  console.log('sent push notifications ' + body + ' to ' + user.pushToken)
+
 }
 
 const sendCallNotification = async (sender, recipient, callType, callID) => {
