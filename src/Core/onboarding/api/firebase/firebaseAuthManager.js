@@ -14,6 +14,7 @@ import { ErrorCode } from '../../api/ErrorCode'
 import { GOOGLE_MAPS_API_KEY } from '../../../../config'
 import { getAddressFromLocation } from '../../utils/Geolocation'
 import { fetchBoostHistoryThisMonth } from '../../../boost/api'
+import { inspect } from 'util'
 
 Geocoder.init(GOOGLE_MAPS_API_KEY)
 
@@ -59,6 +60,8 @@ const onVerification = phone => {
 }
 
 const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
+  console.log("user Details FireBAseAuthManager" , userDetails);
+  
   const { photoFile } = userDetails
   const accountCreationTask = userData => {
     return new Promise((resolve, _reject) => {
@@ -126,6 +129,8 @@ const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
 }
 
 const retrievePersistedAuthUser = () => {
+  console.log("authManagerFirebase.JS");
+
   return new Promise(resolve => {
     authAPI.retrievePersistedAuthUser().then(user => {
       if (user) {
@@ -377,12 +382,16 @@ const registerWithPhoneNumber = (
 }
 
 const handleSuccessfulLogin = async (user, accountCreated) => {
+  console.log("inside handleSuccessfulLogin..." , inspect(user , {depth:4000 , colors : true}));
   // After a successful login, we fetch & store the device token for push notifications, location, online status, etc.
   // we don't wait for fetching & updating the location or push token, for performance reasons (especially on Android)
   const { extraInfo, boosts } = await fetchAndStoreExtraInfoUponLogin(
     user,
     accountCreated,
   )
+  console.log("inside handleSuccessfulLogin...boosts" , inspect(boosts , {depth:4000 , colors : true}));
+  console.log("inside handleSuccessfulLogin... extraInfo" , inspect(extraInfo , {depth:4000 , colors : true}));
+
   return { user: { ...user, ...extraInfo }, boosts }
 }
 

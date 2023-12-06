@@ -40,11 +40,15 @@ type AuthActionTypes =
 
 export const auth = (state = initialState, action: AuthActionTypes) => {
   switch (action.type) {
-    case UPDATE_USER:
+    case UPDATE_USER: {
+      console.log("update user............. from redux state" , state );
+      console.log("update user............. from redux" , action.data.user );
+      
       return {
         ...state,
         user: action.data.user,
       }
+    }
     case UPDATE_USER_BOOST: {
       const newBoostData = action.data
       return {

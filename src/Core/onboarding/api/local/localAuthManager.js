@@ -60,6 +60,8 @@ const loginWithEmailAndPassword = (email, password) => {
  * returns a promise that resolves to user data
  **/
 const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
+  console.log("user Details localAuthManager" , userDetails);
+
   return new Promise(function (resolve, _reject) {
     resolve({ user: mockData })
     // morkData takes the format of:
@@ -184,6 +186,8 @@ const loginWithSMSCode = () => {
 const logout = () => {}
 
 const retrievePersistedAuthUser = () => {
+  console.log("localAuthManager.JS");
+
   return new Promise(resolve => {
     resolve(null)
   })

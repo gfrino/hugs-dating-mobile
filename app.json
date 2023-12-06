@@ -6,7 +6,9 @@
     "url": "https://u.expo.dev/ac044dd5-1ece-4d6e-9f41-ff0d5fd43032"
   },
   "android": {},
-  "ios": {},
+  "ios": {
+    "bundleIdentifier": "com.root.hugsdatings"
+  },
   "extra": {
     "eas": {
       "projectId": "ac044dd5-1ece-4d6e-9f41-ff0d5fd43032"

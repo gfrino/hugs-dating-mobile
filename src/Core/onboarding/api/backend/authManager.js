@@ -4,6 +4,8 @@ import * as Location from 'expo-location'
 import { storageAPI } from '../../../media'
 import * as authAPI from './authClient'
 import { updateUser } from '../../../users'
+import {inspect} from 'util'
+
 
 const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
 // const baseAPIURL = 'http://localhost:3000/api/'
@@ -16,6 +18,7 @@ const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
  * returns a promise that resolves to user data
  **/
 const loginWithEmailAndPassword = (email, password) => {
+  console.log("INside Loginnnnnnnnnnnnnn");
   return new Promise(function (resolve, _reject) {
     fetch(baseAPIURL + 'login', {
       method: 'post',
@@ -26,7 +29,8 @@ const loginWithEmailAndPassword = (email, password) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json)
+        console.log("step 6 inside login with email" , inspect(json , {depth : 2000 , colors : true}))
+        
         AsyncStorage.setItem('jwt_token', json?.token)
         AsyncStorage.setItem('logged_in_user_id', json?.userData?.id)
         handleSuccessfulLogin(json.userData, false).then(res => {
@@ -79,6 +83,7 @@ const loginWithEmailAndPassword = (email, password) => {
  * returns a promise that resolves to user data
  **/
 const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
+  console.log("user Details Auth Manager" , userDetails);
   const {
     email,
     firstName,
@@ -116,12 +121,14 @@ const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json)
+        console.log("step 4 inside createAccountWithEmailAndPassword" , inspect(json , {depth : 2000 , colors : true}))
         // We've created the account, and now we are going to upload the profile picture if the user picked one
         if (!photoFile) {
-          // No profile picture, we're done
-          loginWithEmailAndPassword(email, password).then(data => resolve(data))
-          return
+          // No profile picture, we're done 
+          console.log("No profile picture,");
+          const res = loginWithEmailAndPassword(email, password).then(data => resolve(data))
+          console.log("step 5 loginWithEmailAndPassword responce", inspect(res , {depth : 2000 , colors : true}));
+          return res
         } else {
           storageAPI.processAndUploadMediaFile(photoFile).then(response => {
             // Once upload finished, we update the profile photo field with the correct download URL
@@ -257,6 +264,7 @@ const logout = async user => {
 }
 
 const retrievePersistedAuthUser = () => {
+  console.log("authManager.JS");
   return new Promise(resolve => {
     authAPI.retrievePersistedAuthUser().then(user => {
       if (user) {

@@ -74,6 +74,7 @@ const SwipeScreen = props => {
     )
 
     if (user) {
+      console.log("user.,.,.,.,..,.,.,.,.,.," , user?.settings?.distance_radius);
       userRef.current = firebase.firestore().collection('users').doc(user.id)
     }
 
@@ -369,6 +370,7 @@ const SwipeScreen = props => {
 
     if (data?.length) {
       const filteredData = data.filter(doc => !userSwipes[doc.id])
+      console.log("setRecommendations....." , setRecommendations);
       setRecommendations(filteredData)
     }
     console.log('getMoreRecommendations setIsLoading(false)')

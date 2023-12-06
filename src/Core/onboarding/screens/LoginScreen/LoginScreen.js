@@ -52,6 +52,7 @@ const LoginScreen = props => {
           const hasCategory = user.userCategory ? true : false
           const boostHistory = response.boosts
           dispatch(BoostStoreCreators.setMonthlyHistory(boostHistory))
+          console.log("LoginScreen............" , user);
           dispatch(setUserData({ user }))
           Keyboard.dismiss()
           navigation.reset({

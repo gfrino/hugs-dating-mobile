@@ -53,7 +53,7 @@ const Deck = props => {
 
   const styleProfile = dynamicStyles(theme, appearance)
 
-  console.log('user...././././././.' , user.pushToken);
+  console.log('user...././././././.' , user);
  
   const useSwiper = useRef(null)
   const hasActivePlan = useRef(false)

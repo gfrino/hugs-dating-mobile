@@ -29,6 +29,8 @@ const handleUserFromAuthStateChanged = (user, resolve) => {
  * Verify that the user is logged in on that device
  */
 export const retrievePersistedAuthUser = () => {
+  console.log("authClientLocal.JS");
+
   // return a promise
   return new Promise(resolve => {
     // retrieve saved user from local storage and verify that the user....

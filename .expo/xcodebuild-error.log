@@ -1,6 +1,18 @@
-** BUILD FAILED **
-
-
-The following build commands failed:
-	CompileC /Users/macbookpro/Library/Developer/Xcode/DerivedData/HugsDating-fbgdpfbzeopwkqfqyfhomuvjykkv/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/RNFBMessaging.build/Objects-normal/x86_64/RNFBMessagingSerializer.o /Users/macbookpro/Thirtynorth/pizza-projects/hugs-dating-mobile/node_modules/@react-native-firebase/messaging/ios/RNFBMessaging/RNFBMessagingSerializer.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler (in target 'RNFBMessaging' from project 'Pods')
-(1 failure)
+2023-12-06 11:21:07.162 xcodebuild[3256:34027]  DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/DVTiOSFrameworks/DVTiOSFrameworks-21506/DTDeviceKitBase/DTDKRemoteDeviceData.m:382
+Details:  (null) deviceType from 776b185108890311765a5cd769062dd01fd3166f was NULL when -platform called.
+Object:   <DTDKMobileDeviceToken: 0x7f93777e1fa0>
+Method:   -platform
+Thread:   <NSThread: 0x7f937510bfc0>{number = 7, name = (null)}
+Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
+2023-12-06 11:21:07.859 xcodebuild[3256:34027]  DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/DVTiOSFrameworks/DVTiOSFrameworks-21506/DTDeviceKitBase/DTDKRemoteDeviceData.m:382
+Details:  (null) deviceType from 776b185108890311765a5cd769062dd01fd3166f was NULL when -platform called.
+Object:   <DTDKMobileDeviceToken: 0x7f93777e1fa0>
+Method:   -platform
+Thread:   <NSThread: 0x7f937510bfc0>{number = 7, name = (null)}
+Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.
+2023-12-06 11:21:07.983 xcodebuild[3256:34027]  DVTAssertions: Warning in /System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/DVTiOSFrameworks/DVTiOSFrameworks-21506/DTDeviceKitBase/DTDKRemoteDeviceData.m:382
+Details:  (null) deviceType from 776b185108890311765a5cd769062dd01fd3166f was NULL when -platform called.
+Object:   <DTDKMobileDeviceToken: 0x7f93777e1fa0>
+Method:   -platform
+Thread:   <NSThread: 0x7f937510bfc0>{number = 7, name = (null)}
+Please file a bug at https://feedbackassistant.apple.com with this warning message and any useful information you can provide.

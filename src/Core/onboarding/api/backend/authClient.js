@@ -4,6 +4,7 @@ import VoipPushNotification from 'react-native-voip-push-notification'
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
 import { ErrorCode } from '../../api/ErrorCode'
+import {inspect} from 'util'
 
 const baseAPIURL = 'https://codebaze.herokuapp.com/api/';
 // const baseAPIURL = 'http://localhost:3000/api/'
@@ -28,13 +29,16 @@ const fetchUser = userID => {
 }
 
 export const retrievePersistedAuthUser = () => {
+  console.log("authClient.JS");
   return new Promise(resolve => {
     AsyncStorage.getItem('logged_in_user_id').then(userID => {
       if (!userID) {
         resolve(null)
         return
       }
-      fetchUser(userID).then(res => resolve(res))
+      const res  = fetchUser(userID).then(res => resolve(res))
+      console.log("121212121212121212========" , inspect(res , {depth : 2000 , colors : true}));
+      
     })
   })
 }
@@ -437,6 +441,7 @@ export const updateProfilePhoto = (userID, profilePictureURL) => {
 }
 
 export const fetchAndStorePushTokenIfPossible = async user => {
+  console.log("userrrrrrrrrrrrrrrrrrrrrrrrrr AUTH CLIENT Backend" , inspect(user , {depth : 2000 , colors: true}));
   try {
     const settings = await messaging().requestPermission()
     if (settings) {
@@ -446,6 +451,13 @@ export const fetchAndStorePushTokenIfPossible = async user => {
         pushToken: token,
         pushKitToken: '',
         badgeCount: 0,
+        settings:{
+          gender_preference: 'all',
+          distance_radius: '100 miles',
+          category_preference: 'all',
+          show_me: true,
+          gender: 'none' 
+         },
       })
     }
 

@@ -7,6 +7,9 @@ import { setUserData } from '../../redux/auth'
 import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
 import { useAuth } from '../../hooks/useAuth'
 
+import {inspect} from 'util'
+
+
 const LoadScreen = props => {
   const { navigation } = props
 
@@ -31,11 +34,14 @@ const LoadScreen = props => {
       }
       navigation.navigate('LoginStack')
     } else {
+      console.log("=========================================" , inspect(shouldShowOnboardingFlow , {depth : 2000 , colors : true}));
       navigation.navigate('Walkthrough')
     }
   }
 
   const fetchPersistedUserIfNeeded = async () => {
+  console.log("LoadScreen.JS");
+
     if (!authManager?.retrievePersistedAuthUser) {
       return navigation.navigate('DelayedHome')
     }
@@ -43,6 +49,7 @@ const LoadScreen = props => {
       ?.retrievePersistedAuthUser(config)
       .then(response => {
         if (response?.user) {
+          console.log("LoadScreen............" , inspect(response?.user , {depth : 2000 , colors : true}  ) );
           dispatch(
             setUserData({
               user: response.user,

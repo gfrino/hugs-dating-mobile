@@ -26,9 +26,9 @@ const sendPushNotification = async (
   metadata = {},
 ) => {
 
-  console.log("sent push notifications" , toUser?.id)
+  console.log("sent push notifications" , toUser)
   const user = await getUserByID(toUser?.id)
-
+  
 
 
   if (metadata && metadata.outBound && user.id == metadata.outBound.id) {

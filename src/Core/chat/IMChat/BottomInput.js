@@ -120,7 +120,7 @@ function BottomInput(props) {
             </TouchableHighlight>
           </View>
         )}
-        <View style={[styles.progressBar, { width: `${uploadProgress}%` }]} />
+        <View style={[styles.progressBar,{ width: `${uploadProgress}%` }]} />
         <View style={styles.inputBar}>
           <TouchableOpacity
             onPress={onAddDocPress}

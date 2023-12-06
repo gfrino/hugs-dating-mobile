@@ -6,6 +6,8 @@ import ThreadItem from './ThreadItem'
 import TypingIndicator from './TypingIndicator'
 import dynamicStyles from './styles'
 import { getUnixTimeStamp } from '~/Core/helpers/timeFormat'
+import { Platform } from 'react-native'
+
 
 function MessageThread(props) {
   const {
@@ -109,7 +111,7 @@ function MessageThread(props) {
     <FlatList
       inverted={true}
       vertical={true}
-      style={styles.messageThreadContainer}
+      style={[styles.messageThreadContainer , {marginBottom : Platform.OS == 'ios' && 50}]}
       showsVerticalScrollIndicator={false}
       data={messages}
       renderItem={renderChatItem}

@@ -1,37 +1,14 @@
 require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
 require File.join(File.dirname(`node --print "require.resolve('react-native/package.json')"`), "scripts/react_native_pods")
 require File.join(File.dirname(`node --print "require.resolve('@react-native-community/cli-platform-ios/package.json')"`), "native_modules")
-$FirebaseSDKVersion = '9.6.0'
-# platform :ios, '13.0'
+
+platform :ios, '13.0'
 
 require 'json'
 podfile_properties = JSON.parse(File.read('./Podfile.properties.json')) rescue {}
 
-platform :ios, podfile_properties['ios.deploymentTarget'] || '13.0'
-install! 'cocoapods',
-  :deterministic_uuids => false
-
-  # pod 'Firebase', :modular_headers => true
-  # pod 'FirebaseCoreInternal', :modular_headers => true
-  # pod 'GoogleUtilities', :modular_headers => true
-  # pod 'FirebaseCore', :modular_headers => true
-
 target 'HugsDating' do
-  use_expo_modules!
   config = use_native_modules!
-
-  pod 'Firebase', :modular_headers => true
-  pod 'FirebaseCore', :modular_headers => true
-  pod 'FirebaseCoreInternal', :modular_headers => true  
-  pod 'FirebaseStorageInternal', :modular_headers => true
-  pod 'FirebaseCoreExtension', :modular_headers => true
-  pod 'FirebaseAppCheckInterop', :modular_headers => true
-  pod 'FirebaseAuthInterop', :modular_headers => true
-  pod 'FirebaseMessagingInterop', :modular_headers => true
-  pod 'GTMSessionFetcher', :modular_headers => true
-  pod 'FirebaseAppCheckInterop', :modular_headers => true
-  pod 'FirebaseAuthInterop', :modular_headers => true
-  pod 'GoogleUtilities', :modular_headers => true
 
   use_react_native!(
     :path => config[:reactNativePath],

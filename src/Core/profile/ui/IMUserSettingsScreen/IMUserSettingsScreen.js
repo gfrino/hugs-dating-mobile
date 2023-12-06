@@ -69,6 +69,8 @@ export default function IMUserSettingsScreen(props) {
 
     let newUser = { ...currentUser, settings: newSettings }
     updateUser(currentUser.id, newUser)
+    console.log("IMUserSettingsScreen............" , newUser);
+
     dispatch(setUserData({ user: newUser }))
     navigation.goBack()
   }

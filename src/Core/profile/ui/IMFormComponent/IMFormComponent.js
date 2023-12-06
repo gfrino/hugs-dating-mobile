@@ -109,6 +109,7 @@ function IMFormComponent(props) {
   const onActionSheetValueSelected = (selectField, selectedIndex) => {
     if (selectedIndex < selectField.options.length) {
       const newValue = selectField.options[selectedIndex]
+      console.log("newValueeee" , newValue);
       onFormFieldValueChange(selectField, newValue)
     }
   }
@@ -122,6 +123,7 @@ function IMFormComponent(props) {
       ? formatUserCategory(selectedUserCategory, localized)
       : computeValue(selectField)
 
+      console.log("valueeeeeeee........" , value);
     const premiumAlertDesc =
       selectField.key === 'category_preference'
         ? localized('Upgrade to change category preference')
@@ -171,7 +173,7 @@ function IMFormComponent(props) {
           style={[
             styles.selectFieldStyle,
             styles.inputFieldStyle,{marginBottom:10 , marginTop: 10 , marginLeft : 15 , marginRight:15},
-            { opacity: isPremium ? 1 : 0.5 },
+            { opacity: isPremium ? 1 : 0.5 ,},
           ]}
           onPress={
             isPremium
@@ -252,6 +254,7 @@ function IMFormComponent(props) {
   }
 
   const renderSection = section => {
+
     return (
       <View key={section.title || 'save-btn'}>
         {section.title ? (
@@ -300,11 +303,16 @@ function IMFormComponent(props) {
 
   const computeValue = field => {
     if (alteredFormDict[field.key] != null) {
+    // console.log('//////////////wewewesssssss' , field);
+
       return displayValue(field, alteredFormDict[field.key])
     }
     if (initialValuesDict[field.key] != null) {
+    // console.log('//////////////wewewe' , field);
+
       return displayValue(field, initialValuesDict[field.key])
     }
+    // console.log('//////////////' , field.value);
     return displayValue(field, field.value)
   }
 

@@ -21,6 +21,7 @@ import TermsOfUseView from '../../components/TermsOfUseView'
 import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
 import { useAuth } from '../../hooks/useAuth'
 import { BoostStoreCreators } from '../../../boost/redux'
+import {inspect} from 'util'
 
 const SignupScreen = props => {
   const { navigation } = props
@@ -59,12 +60,15 @@ const SignupScreen = props => {
   }
 
   const onRegister = async () => {
+    console.log("step 2..... inside onRegister");
+    console.log("authManager" , inspect(authManager , {depth : 2000 , colors : true}));
     const { error: usernameError } =
       await authManager.validateUsernameFieldIfNeeded(inputFields, config)
     if (usernameError) {
       Alert.alert('', localized(usernameError), [{ text: localized('OK') }], {
         cancelable: false,
       })
+      console.log("step 3 user name");
       setInputFields(prevFields => ({
         ...prevFields,
         password: '',
@@ -143,11 +147,11 @@ const SignupScreen = props => {
     if (userDetails.username) {
       userDetails.username = userDetails.username?.toLowerCase()
     }
-
     authManager
       .createAccountWithEmailAndPassword(userDetails, config)
       .then(response => {
         const user = response.user
+        console.log("SignUpScreen............" , user);
         dispatch(BoostStoreCreators.setMonthlyHistory([]))
         if (user) {
           dispatch(setUserData({ user }))
@@ -162,6 +166,7 @@ const SignupScreen = props => {
               },
             ],
           })
+          console.log("fillllllllllllllll======================");
         } else {
           setLoading(false)
           Alert.alert(
@@ -201,6 +206,7 @@ const SignupScreen = props => {
   }
 
   const renderSignupWithEmail = () => {
+    console.log("Step 1.............");
     return (
       <>
         {config.signupFields.map(renderInputField)}

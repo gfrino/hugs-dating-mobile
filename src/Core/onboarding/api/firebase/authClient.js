@@ -11,6 +11,7 @@ import {
   getCurrMonthUnixTimeStamp,
 } from '../../../helpers/timeFormat'
 import { validateBoost } from '../../../../helpers/statics'
+import { inspect } from 'util'
 
 const usersRef = firestore().collection('users')
 const boostHistoryRef = firestore().collection('boostHistory')
@@ -22,6 +23,7 @@ const handleUserFromAuthStateChanged = (user, resolve) => {
       .get()
       .then(document => {
         const userData = document.data()
+        console.log("handleUserFromAuthStateChanged...." , inspect(userData , {depth:2000 , colors : true}));
         resolve({ ...userData, id: user.uid, userID: user.uid })
       })
       .catch(error => {
@@ -50,10 +52,16 @@ export const fetchBoostHistoryThisMonth = async user => {
 }
 
 export const retrievePersistedAuthUser = () => {
+  console.log("authClientFireBAse.JS");
+
   return new Promise(resolve => {
-    return auth().onAuthStateChanged(user => {
-      return handleUserFromAuthStateChanged(user, resolve)
+    const res = auth().onAuthStateChanged(user => {
+      const data = handleUserFromAuthStateChanged(user, resolve)
+    console.log("res...... authClientFireBAse" , inspect(data , {depth: 2000 , colors : true}));
+      return data
     })
+    console.log("res...... authClientFireBAse" , inspect(res , {depth: 2000 , colors : true}));
+    return res
   })
 }
 
@@ -453,6 +461,8 @@ export const updateProfilePhoto = (userID, profilePictureURL) => {
 }
 
 export const fetchAndStorePushTokenIfPossible = async user => {
+  console.log("userrrrrrrrrrrrrrrrrrrrrrrrrr fireBase" , inspect(user , {depth : 2000 , colors: true}));
+
   try {
     const settings = await messaging().requestPermission()
     if (settings) {
@@ -462,6 +472,20 @@ export const fetchAndStorePushTokenIfPossible = async user => {
         pushToken: token,
         pushKitToken: '',
         badgeCount: 0,
+        settings:{
+          gender_preference : user?.settings?.gender_preference ? user?.settings?.gender_preference : 'all' ,
+          distance_radius : user?.settings?.distance_radius ? user?.settings?.distance_radius : '100 miles' ,
+          category_preference : user?.settings?.category_preference ? user?.settings?.category_preference : 'all' ,
+          show_me : user?.settings?.show_me ? user?.settings?.show_me : true ,
+          gender : user?.settings?.gender ? user?.settings?.gender : 'none' ,
+          
+          // gender_preference: 'all',
+          // distance_radius: '100 miles',
+          // category_preference: 'all',
+          // show_me: true,
+          // gender: 'none' 
+         }
+        ,
       })
       console.log('success....' , data);
     }

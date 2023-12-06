@@ -14,6 +14,8 @@ import FastImage from 'react-native-fast-image'
 import { useTheme, useTranslations } from 'dopenative'
 import dynamicStyles from './styles'
 import { profilePictureBorder } from '../../../helpers/statics'
+import { ScreenHeight } from 'react-native-elements/dist/helpers'
+
 
 const Image = FastImage
 
@@ -114,7 +116,7 @@ const TNProfilePictureSelector = props => {
 
   const closeButton = () => (
     <TouchableOpacity
-      style={styles.closeButton}
+      style={[styles.closeButton , {top : Platform.OS == 'ios' && ScreenHeight - 630,}]}
       onPress={() => setIsImageViewerVisible(false)}>
       <Image style={styles.closeIcon} source={theme.icons.close} />
     </TouchableOpacity>

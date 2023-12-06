@@ -13,6 +13,7 @@ import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
 import { useAuth } from '../../hooks/useAuth'
 import useCurrentUser from '../../hooks/useCurrentUser'
 import { BoostStoreCreators } from '../../../boost/redux'
+import {inspect} from 'util'
 
 const WelcomeScreen = props => {
   const { navigation } = props
@@ -62,6 +63,7 @@ const WelcomeScreen = props => {
           const user = response.user
           const hasCategory = user.userCategory ? true : false
           const boostHistory = response.boosts
+          console.log("WellcomScreen............" , inspect(response.user , {depth : 2000 , colors : true}));
           dispatch(
             setUserData({
               user: response.user,
