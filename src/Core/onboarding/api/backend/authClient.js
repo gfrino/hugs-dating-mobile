@@ -446,6 +446,11 @@ export const fetchAndStorePushTokenIfPossible = async user => {
         pushToken: token,
         pushKitToken: '',
         badgeCount: 0,
+        gender_preference: 'all',
+          distance_radius: '100 miles',
+          category_preference: 'all',
+          show_me: true,
+          gender: 'none' 
       })
     }
 

@@ -63,6 +63,7 @@ const IAPManagerWrapped = props => {
   let purchaseErrorSubscription = null
 
   useEffect(() => {
+    console.log("subscription........" , subscription);
     if (subscription) {
       handleUserSubscription(subscription)
       setPlanFromDevice()
@@ -166,7 +167,9 @@ const IAPManagerWrapped = props => {
       pending_renewal_info?.length > 0 &&
       pending_renewal_info[0].expiration_intent
 
-    if (!validationSuccess || isPendingRenewal) {
+    // if (!validationSuccess || isPendingRenewal) {
+    if (!validationSuccess && isPendingRenewal) {
+
       updateUser(userID, { isVIP: false })
       updateUserSubscription(userID, { active: false })
 
@@ -175,7 +178,6 @@ const IAPManagerWrapped = props => {
     }
 
     dispatch(setIsPlanActive(true))
-
     updateUserSubscription(userID, updatedReceipt)
     updateUser(userID, { isVIP: true })
   }

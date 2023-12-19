@@ -44,6 +44,7 @@ const Deck = props => {
 
   const { localized } = useTranslations()
   const isPlanActive = useSelector(state => state.inAppPurchase.isPlanActive)
+  console.log("isPlanActive......." , isPlanActive);
   const user = useSelector(state => state.auth.user)
   const { theme, appearance } = useTheme()
   const dispatch = useDispatch()
@@ -261,7 +262,8 @@ const Deck = props => {
     )
   }
 
-  if (!isPlanActive && data.length === 0) {
+  // if (!isPlanActive && data.length === 0) {
+  if (data.length === 0) {
     return (
       <View style={styles.textContainer}>
 <>
@@ -284,7 +286,8 @@ const Deck = props => {
           paddingHorizontal: 12,
           marginTop: 10,
           textAlign: 'center',}}>
-          {localized("There's no one new around you. Upgrade your subscription to increase searching radius")}
+          
+          {localized('There is no one new around you. Upgrade your subscription to increase searching radius')}
         </Text>
         
         </>
@@ -292,9 +295,9 @@ const Deck = props => {
     )
   }
 
-  if (data.length === 0) {
-    return <View style={styles.noMoreCards}>{renderEmptyState()}</View>
-  }
+  // if (data.length === 0) {
+  //   return <View style={styles.noMoreCards}>{renderEmptyState()}</View>
+  // }
 
   return (
     <View style={styles.container}>

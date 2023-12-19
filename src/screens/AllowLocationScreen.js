@@ -59,7 +59,7 @@ export const AllowLocationScreen = ({ setIsLocationEnabled }) => {
           )}
         </Text>
         <Pressable style={styles.buttonContainer} onPress={handleLocation}>
-          <Text style={styles.buttonText}>{localized('Allow location')}</Text>
+          <Text style={styles.buttonText}>{localized('Continue')}</Text>
         </Pressable>
       </View>
     </View>

@@ -21,7 +21,7 @@
     "pushKitToken": "",
     "pushToken": "en0ikUvsekt4gdH16kubLi:APA91bEqBXd1hZ9wHRDivdxs1ezORlVFkLAUSt2RDZZx7Tu3u28IsoybGad6suO7DvyYYHlIh45ly7p67bmE2Llf5zbjRZFJOzkqBeqvp7SfUBH8a9MfCP4iKD5XbrKeKsEAT1i_Zt26",
     "settings": {
-      "distance_radius": "unlimited",
+      "distance_radius": "100",
       "gender": "none",
       "gender_preference": "all",
       "show_me": true

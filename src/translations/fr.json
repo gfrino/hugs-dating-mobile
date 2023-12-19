@@ -290,6 +290,8 @@
   "Recurring billing, cancel anytime": "Facturation récurrente, annuler à tout moment",
   "Purchase": "Achat",
   "Allow location": "Autoriser l’emplacement",
+  "Continue" : "Continuer",
+
   "mile away": "Kilomètre",
   "Meet people who love art!": "Rencontrez des personnes qui aiment l'art!",
   "Artists": "Artistes",
@@ -299,5 +301,7 @@
   "Without disabilities":"Sans handicap",
   "Daily swipes exceeded": "Dépassement des balayages quotidiens",
   "You have exceeded the daily swipes limit. Upgrade your account now to enjoy unlimited swipes": "Vous avez dépassé la limite quotidienne de balayages. Mettez à niveau votre compte maintenant pour profiter de balayages illimités",
-  "There's no one new around you. Upgrade your subscription to increase searching radius": "Il n'y a personne de nouveau autour de vous. Mettez à niveau votre abonnement pour augmenter le rayon de recherche"
+  "There is no one new around you. Upgrade your subscription to increase searching radius": "Il n'y a personne de nouveau autour de vous. Mettez à niveau votre abonnement pour augmenter le rayon de recherche" ,
+  "There is no one new around you." : "Il n’y a personne de nouveau autour de vous." 
+
 }

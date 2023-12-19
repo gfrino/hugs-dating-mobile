@@ -10,6 +10,7 @@ export const ConfigContext = React.createContext({})
 export const ConfigProvider = ({ children }) => {
   const { localized } = useTranslations()
   const isPremium = useSelector(state => state.inAppPurchase.isPlanActive)
+  const userDistance = useSelector(state => state.auth.user)
  console.log("isPremium......" , isPremium);
   const config = {
     isSMSAuthEnabled: false,
@@ -224,7 +225,7 @@ export const ConfigProvider = ({ children }) => {
             {
               displayName: localized('Distance Radius'),
               type: 'select',
-              options: ['5', '10', '15', '25', '50', '100', (!isPremium && 'unlimited')],
+              options: ['5', '10', '15', '25', '50', '100' ].concat((!isPremium ? userDistance?.settings?.distance_radius : 'unlimited')),
                 displayOptions: (!isPremium) ? [
                   `5 ${localized('miles')}`,
                   `10 ${localized('miles')}`,
@@ -246,7 +247,7 @@ export const ConfigProvider = ({ children }) => {
               
               editable: true,
               key: 'distance_radius',
-              value: '100',
+              value: '100 miles',
             },
             {
               displayName: localized('Gender'),
@@ -349,7 +350,7 @@ export const ConfigProvider = ({ children }) => {
           title: localized('CONTACT'),
           fields: [
             {
-              displayName: localized('E-mail us'),
+              displayName: localized('E-mail'),
               value: 'info@hugsdating.app',
               type: 'text',
               editable: false,
@@ -361,7 +362,7 @@ export const ConfigProvider = ({ children }) => {
       ],
     },
     dailySwipeLimit: 50, //:TODO Daily limit
-    totalSwipeLimit: 10,
+    totalSwipeLimit: 1,
     subscriptionSlideContents: [
       {
         title: localized('Go VIP'),

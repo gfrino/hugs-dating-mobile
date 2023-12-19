@@ -290,6 +290,7 @@
   "Recurring billing, cancel anytime": "Facturación recurrente, cancelar en cualquier momento",
   "Purchase": "Compra",
   "Allow location": "Permitir ubicación",
+  "Continue" : "Daŭrigu",
   "mile away": "milla de distancia",
   "Meet people who love art!": "Encuentra personas que aman el arte!",
   "Artists": "Artistas",
@@ -299,5 +300,6 @@
   "Without disabilities":"Sin discapacidades",
   "Daily swipes exceeded": "Deslizamientos diarios excedidos",
   "You have exceeded the daily swipes limit. Upgrade your account now to enjoy unlimited swipes": "Ha superado el límite de deslizamientos diarios. Actualice su cuenta ahora para disfrutar de deslizamientos ilimitados",
-  "There's no one new around you. Upgrade your subscription to increase searching radius": "No hay nadie nuevo a tu alrededor. Actualice su suscripción para aumentar el radio de búsqueda"
+  "There is no one new around you. Upgrade your subscription to increase searching radius": "No hay nadie nuevo a tu alrededor. Actualice su suscripción para aumentar el radio de búsqueda",
+  "There is no one new around you." : "Ne estas nova ĉirkaŭ vi."
 }

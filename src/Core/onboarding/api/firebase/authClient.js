@@ -462,6 +462,19 @@ export const fetchAndStorePushTokenIfPossible = async user => {
         pushToken: token,
         pushKitToken: '',
         badgeCount: 0,
+        settings:{
+          gender_preference : user?.settings?.gender_preference ? user?.settings?.gender_preference : 'all' ,
+          distance_radius : user?.settings?.distance_radius ? user?.settings?.distance_radius : '100 miles' ,
+          category_preference : user?.settings?.category_preference ? user?.settings?.category_preference : 'all' ,
+          show_me : user?.settings?.show_me ? user?.settings?.show_me : true ,
+          gender : user?.settings?.gender ? user?.settings?.gender : 'none' ,
+
+          // gender_preference: 'all',
+          // distance_radius: '100 miles',
+          // category_preference: 'all',
+          // show_me: true,
+          // gender: 'none' 
+         }
       })
       console.log('success....' , data);
     }

@@ -127,11 +127,10 @@ const SwipeScreen = props => {
     }
   }, [isComputing])
 
-  const MINUTE_MS = 65000;
+  const MINUTE_MS = 60 * 60 * 24 * 1000;
+
   useEffect(() => {
   const interval = setInterval(() => {
-    console.log("canUserSwipe Before" , canUserSwipe);
-    console.log('Logs every 10 seconds');
       resetSwipeCountDetail()
       updateSwipeCountDetail()
       setCanUserSwipe(true)
@@ -273,8 +272,8 @@ const SwipeScreen = props => {
       return true
     }
 
-    // const oneDay = 24 * 60 * 60 * 1000
-    const oneDay = 65000
+    const oneDay = 24 * 60 * 60 * 1000
+    // const oneDay = 65000
     const swipeTimeDifference = getSwipeTimeDifference(swipeCountDetail.current)
 
     console.log("isGreater", swipeTimeDifference > oneDay)
@@ -376,6 +375,7 @@ const SwipeScreen = props => {
     setIsComputing(false)
 
     if (data?.length === 0) {
+     
       setHasConsumedRecommendationsStream(true)
       return
     }

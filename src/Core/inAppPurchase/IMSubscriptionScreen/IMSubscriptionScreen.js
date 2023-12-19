@@ -64,7 +64,7 @@ export default function IMSubscriptionScreen(props) {
       selectedSubscriptionPlan.subscriptionPeriodUnitIOS ||
       selectedSubscriptionPlan.subscriptionPeriodAndroid
 
-
+    console.log("period" , period);
     setProcessing(true)
     onSetSubscriptionPeriod(period.toLowerCase())
     try {
@@ -76,6 +76,7 @@ export default function IMSubscriptionScreen(props) {
     }
   }
 
+  
   const getIAPProducts = async () => {
     try {
       const plans = await getSubscriptions(config.IAP_SKUS)
